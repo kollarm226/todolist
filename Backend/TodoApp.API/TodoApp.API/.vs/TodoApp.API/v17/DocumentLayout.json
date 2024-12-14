@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|c:\\users\\theen\\onedrive\\school\\projects\\year1\\todolist\\backend\\todoapp.api\\todoapp.api\\todoapp.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|solutionrelative:todoapp.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|c:\\users\\theen\\onedrive\\school\\projects\\year1\\todolist\\backend\\todoapp.api\\todoapp.api\\todoapp.api\\controllers\\todocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|solutionrelative:todoapp.api\\controllers\\todocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|c:\\users\\theen\\onedrive\\school\\projects\\year1\\todolist\\backend\\todoapp.api\\todoapp.api\\todoapp.api\\data\\tododbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|solutionrelative:todoapp.api\\data\\tododbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|c:\\users\\theen\\onedrive\\school\\projects\\year1\\todolist\\backend\\todoapp.api\\todoapp.api\\todoapp.api\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{705A2354-F999-4A6A-A7D3-E0587F8339B8}|TodoApp.API\\TodoApp.API.csproj|solutionrelative:todoapp.api\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,37 +30,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TodoController.cs",
+              "DocumentMoniker": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Controllers\\TodoController.cs",
+              "RelativeDocumentMoniker": "TodoApp.API\\Controllers\\TodoController.cs",
+              "ToolTip": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Controllers\\TodoController.cs",
+              "RelativeToolTip": "TodoApp.API\\Controllers\\TodoController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T09:54:10.983Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\appsettings.json",
+              "RelativeDocumentMoniker": "TodoApp.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\appsettings.json",
+              "RelativeToolTip": "TodoApp.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-14T09:48:18.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TodoDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Data\\TodoDbContext.cs",
+              "RelativeDocumentMoniker": "TodoApp.API\\Data\\TodoDbContext.cs",
+              "ToolTip": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Data\\TodoDbContext.cs",
+              "RelativeToolTip": "TodoApp.API\\Data\\TodoDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T09:46:26.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Todo.cs",
               "DocumentMoniker": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Models\\Todo.cs",
               "RelativeDocumentMoniker": "TodoApp.API\\Models\\Todo.cs",
               "ToolTip": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Models\\Todo.cs",
               "RelativeToolTip": "TodoApp.API\\Models\\Todo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T07:29:33.949Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Program.cs",
               "RelativeDocumentMoniker": "TodoApp.API\\Program.cs",
               "ToolTip": "C:\\Users\\TheEn\\OneDrive\\School\\Projects\\Year1\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\Program.cs",
               "RelativeToolTip": "TodoApp.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T07:22:44.47Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

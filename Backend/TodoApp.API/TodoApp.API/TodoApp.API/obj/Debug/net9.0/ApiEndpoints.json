@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "ContainingType": "TodoApp.API.Controllers.TodoController",
+    "Method": "GetAllTodos",
+    "RelativePath": "api/Todo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

@@ -31,6 +31,15 @@ namespace TodoApp.API.Controllers
             _todoDbContext.Todos.Add(todo);
             await _todoDbContext.SaveChangesAsync();
             return Ok(todo);
-        }   
+        }
+
+        //
+        // [HttpDelete("{id}")]
+        // public async Task<IActionResult> DeleteTodo(Todo todo)
+        // {
+        //     var todos = await _todoDbContext.Todos.ToListAsync();
+        //     return Ok(todos);
+        // }
+        //
     }
 }

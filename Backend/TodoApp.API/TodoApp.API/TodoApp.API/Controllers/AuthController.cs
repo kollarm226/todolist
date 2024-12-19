@@ -40,7 +40,7 @@ namespace TodoApp.API.Controllers
         public IActionResult Login([FromBody] User loginRequest)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.email == loginRequest.email);
-            if (user == null || !PasswordHasher.VerifyPassword(user.password, loginRequest.password))
+            if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))
             {
                 return Unauthorized("Invalid email or password");
             }

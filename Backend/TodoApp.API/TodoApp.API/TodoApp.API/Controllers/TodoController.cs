@@ -33,13 +33,38 @@ namespace TodoApp.API.Controllers
             return Ok(todo);
         }
 
-        //
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteTodo(Todo todo)
-        // {
-        //     var todos = await _todoDbContext.Todos.ToListAsync();
-        //     return Ok(todos);
-        // }
-        //
+        
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> DeleteTodo([FromRoute] Guid id)
+        {
+            var todo = await _todoDbContext.Todos.FindAsync(id);
+            
+            if(todo == null)
+                return NotFound();
+
+            todo.isDeleted = true;
+
+            await _todoDbContext.SaveChangesAsync();
+            return Ok(todo);
+            
+        }
+
+        
+        
+        [HttpPut("{id,done}")]
+
+        public async Task<IActionResult> UpdateTodo([FromRoute] Guid id, Todo todoUpdateRequest)
+        {
+            var todo = await _todoDbContext.Todos.FindAsync(id);
+            
+            if(todo == null)
+                return NotFound();
+
+            todo.done = todoUpdateRequest.done;
+
+            await _todoDbContext.SaveChangesAsync();
+
+            return Ok(todo);
+        }
     }
 }

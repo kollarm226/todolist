@@ -41,7 +41,8 @@ namespace TodoApp.API.Migrations
                     name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     done = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    priority = table.Column<int>(type: "int", nullable: false)
+                    priority = table.Column<int>(type: "int", nullable: false),
+                    isDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,9 +56,9 @@ namespace TodoApp.API.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(type: "longtext", nullable: false)
+                    name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    surname = table.Column<string>(type: "longtext", nullable: false)
+                    surname = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

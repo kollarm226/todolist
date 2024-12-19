@@ -58,6 +58,9 @@ namespace TodoApp.API.Migrations
                     b.Property<int>("idList")
                         .HasColumnType("int");
 
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -83,7 +86,6 @@ namespace TodoApp.API.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("password")
@@ -91,7 +93,6 @@ namespace TodoApp.API.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("surname")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("id");

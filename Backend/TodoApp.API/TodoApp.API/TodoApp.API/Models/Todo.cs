@@ -7,6 +7,6 @@
         public string name { get; set; }
         public Boolean done { get; set; }
         public int priority { get; set; }
-        // public Boolean isDeleted { get; set; }
+        public Boolean isDeleted { get; set; }
     }
 }

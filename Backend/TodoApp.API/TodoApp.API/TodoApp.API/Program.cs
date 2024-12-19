@@ -3,14 +3,53 @@ using TodoApp.API.Data;
 using System; 
 using MySql.Data.MySqlClient; 
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Load configuration
+var configurationBuilder = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile(
+    "appsettings.json", optional: false, reloadOnChange: true
+    ); 
+IConfiguration configuration = configurationBuilder.Build();
 
-var builder1 = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true); 
-IConfiguration configuration = builder1.Build(); 
+// Add services to the container
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+    {
+       options.SwaggerDoc("v1", new OpenApiInfo
+           {
+               Version = "v1",
+               Title = "Todo.API",
+               Description = "An ASP.NET Core Web API for managing Todo items",
+           });
+    });
+
+// Add authentication
+string jwtsecret = configuration["JWTSettings:Secret"];
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = configuration["JWTSettings:Issuer"],
+        ValidAudience = configuration["JWTSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtsecret))
+    };
+});
+
+// Register the DbContext with MySQL
 string connectionString = configuration.GetConnectionString("TodoDbConnectionString");
+builder.Services.AddDbContext<TodoDbContext>(options =>
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21))));
+
 using (MySqlConnection conn = new MySqlConnection(connectionString))
 {
     try
@@ -20,10 +59,10 @@ using (MySqlConnection conn = new MySqlConnection(connectionString))
         string sql = "SELECT * FROM users";
         MySqlCommand cmd = new MySqlCommand(sql, conn);
         MySqlDataReader rdr = cmd.ExecuteReader();
-        
+
         while (rdr.Read()) { 
             Console.WriteLine($"{rdr[0]} -- {rdr[1]}");
-            
+
         }
     }
     catch (Exception ex)
@@ -33,23 +72,11 @@ using (MySqlConnection conn = new MySqlConnection(connectionString))
 
 }
 
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
-
-// builder.Services.AddDbContext<TodoDbContext>(
-//     options => options.UseSqlServer(builder.Configuration.GetConnectionString("TodoDbConnectionString")));
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-
-
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    //app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
@@ -57,10 +84,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger/index.html");
+    return Task.CompletedTask;
+});
+
+app.UseAuthentication();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

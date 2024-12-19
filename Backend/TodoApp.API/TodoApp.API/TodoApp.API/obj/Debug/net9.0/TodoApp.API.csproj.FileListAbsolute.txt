@@ -483,3 +483,10 @@ C:\Users\TheEn\Documents\Projects\todolist\Backend\TodoApp.API\TodoApp.API\TodoA
 C:\Users\TheEn\Documents\Projects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\TheEn\Documents\Projects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\BCrypt.Net-Next.dll
 C:\Users\TheEn\Documents\Projects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\MySqlConnector.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\palit\RiderProjects\todolist\Backend\TodoApp.API\TodoApp.API\TodoApp.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

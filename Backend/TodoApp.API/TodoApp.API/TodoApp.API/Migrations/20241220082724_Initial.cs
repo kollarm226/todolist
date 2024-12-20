@@ -37,12 +37,12 @@ namespace TodoApp.API.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    idList = table.Column<int>(type: "int", nullable: false),
+                    idList = table.Column<int>(type: "int", nullable: true),
                     name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    done = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    priority = table.Column<int>(type: "int", nullable: false),
-                    isDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    done = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: false),
+                    priority = table.Column<int>(type: "int", nullable: true),
+                    isDeleted = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {

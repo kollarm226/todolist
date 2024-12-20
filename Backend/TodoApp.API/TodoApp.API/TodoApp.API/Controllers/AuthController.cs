@@ -22,7 +22,7 @@ namespace TodoApp.API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register")]
+        [HttpPost("register{name}/{surname}/{password}/{email}")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
             if (_dbContext.Users.Any(x => x.email == user.email))

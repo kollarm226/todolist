@@ -24,7 +24,7 @@ namespace TodoApp.API.Controllers
             return Ok(todos);
         }
 
-        [HttpPost("name, id, ")]
+        [HttpPost("{id}/{name}/{priority}")]
         public async Task<IActionResult> AddTodo(Todo todo)
         {
             todo.id = Guid.NewGuid();
@@ -51,7 +51,7 @@ namespace TodoApp.API.Controllers
 
         
         
-        [HttpPut("{id,done}")]
+        [HttpPut("{id}/{done}")]
 
         public async Task<IActionResult> UpdateTodo([FromRoute] Guid id, Todo todoUpdateRequest)
         {

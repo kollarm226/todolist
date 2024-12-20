@@ -30,7 +30,13 @@ builder.Services.AddSwaggerGen(options =>
     });
 
 // Add authentication
-string jwtsecret = configuration["JWTSettings:Secret"];
+string? jwtSecret = configuration["JWTSettings:Secret"];
+
+if (string.IsNullOrEmpty(jwtSecret))
+{
+    throw new InvalidOperationException("JWT Secret is not configured properly.");
+}
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -41,12 +47,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = configuration["JWTSettings:Issuer"],
         ValidAudience = configuration["JWTSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtsecret))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
     };
 });
 
 // Register the DbContext with MySQL
-string connectionString = configuration.GetConnectionString("TodoDbConnectionString");
+string? connectionString = configuration.GetConnectionString("TodoDbConnectionString");
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Database connection string is not configured properly.");
+}
+
 builder.Services.AddDbContext<TodoDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21))));
 

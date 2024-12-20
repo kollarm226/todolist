@@ -12,7 +12,7 @@ using TodoApp.API.Data;
 namespace TodoApp.API.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20241219172253_Initial")]
+    [Migration("20241220072441_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -56,13 +56,17 @@ namespace TodoApp.API.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("done")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<int>("idList")
                         .HasColumnType("int");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("name")
                         .IsRequired()

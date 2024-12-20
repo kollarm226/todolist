@@ -40,9 +40,9 @@ namespace TodoApp.API.Migrations
                     idList = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    done = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    done = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     priority = table.Column<int>(type: "int", nullable: false),
-                    isDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    isDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {

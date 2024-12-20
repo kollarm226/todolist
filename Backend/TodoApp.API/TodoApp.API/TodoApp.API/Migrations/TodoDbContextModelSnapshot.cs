@@ -53,13 +53,17 @@ namespace TodoApp.API.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("done")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<int>("idList")
                         .HasColumnType("int");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("name")
                         .IsRequired()

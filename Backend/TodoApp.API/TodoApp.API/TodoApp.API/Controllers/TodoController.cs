@@ -24,7 +24,7 @@ namespace TodoApp.API.Controllers
             return Ok(todos);
         }
 
-        [HttpPost]
+        [HttpPost("name, id, ")]
         public async Task<IActionResult> AddTodo(Todo todo)
         {
             todo.id = Guid.NewGuid();

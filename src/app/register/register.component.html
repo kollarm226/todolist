@@ -1,0 +1,41 @@
+<div class="center-container">
+  <p-card header="Registration form" class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
+    <form [formGroup]="formGroup">
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-user"></p-inputicon>
+          <input pInputText id="username" autocomplete="off" formControlName="username"/>
+        </p-iconfield>
+        <label for="username">Username</label>
+      </p-iftalabel>
+
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-envelope"></p-inputicon>
+          <input pInputText id="email" autocomplete="off" formControlName="email"/>
+        </p-iconfield>
+        <label>Email</label>
+      </p-iftalabel>
+
+      <p-ifta-label class="field-spacing">
+        <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
+        <label>Password</label>
+      </p-ifta-label>
+
+      <p-ifta-label class="field-spacing">
+        <p-password inputId="repeatPassword" formControlName="repeatPassword" [feedback]="false"
+                    [toggleMask]="true"></p-password>
+        <label>Repeat password</label>
+      </p-ifta-label>
+
+      <div class="field-spacing">
+        <p-checkbox formControlName="checkbox" inputId="acceptTerms" binary="true"></p-checkbox>
+        <label class="ml-2">I accept the terms of use.</label>
+      </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <p-button label="Register your account" class="w-full" (click)="register()"></p-button>
+    </ng-template>
+  </p-card>
+</div>

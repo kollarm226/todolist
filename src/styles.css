@@ -1,0 +1,10 @@
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+body {
+  background-color: #2A3D55;
+  color: #2A3D55; /* Optional: Change default text color to white for better readability */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* You can customize the font family as needed */
+}

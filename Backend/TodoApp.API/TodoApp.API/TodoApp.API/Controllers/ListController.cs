@@ -51,6 +51,20 @@ namespace TodoApp.API.Controllers
     
             return Ok(new { TotalItems = totalItems, Lists = lists });
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteList(int id)
+        {
+            var list = await _dbContext.Lists.FindAsync(id);
 
+            if (list == null)
+            {
+                return NotFound(new { Message = $"List with ID = {id} not found." });
+            }
+
+            _dbContext.Lists.Remove(list);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(new { Message = $"List with ID = {id} has been deleted successfully." });
+        }
     }
 }

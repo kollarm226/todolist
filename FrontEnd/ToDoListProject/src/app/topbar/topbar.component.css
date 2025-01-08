@@ -1,0 +1,36 @@
+.header-bar {
+  background-color: #617691;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}

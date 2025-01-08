@@ -1,0 +1,48 @@
+<div class="center-container">
+  <p-card header="Registration" class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
+    <form [formGroup]="formGroup">
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-user"></p-inputicon>
+          <input pInputText id="username" autocomplete="off" formControlName="username"/>
+        </p-iconfield>
+        <label for="username">Username</label>
+      </p-iftalabel>
+
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-envelope"></p-inputicon>
+          <input pInputText id="email" autocomplete="off" formControlName="email"/>
+        </p-iconfield>
+        <label for="email">Email</label>
+      </p-iftalabel>
+
+      <p-iftalabel class="field-spacing">
+        <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
+        <label for="password">Password</label>
+      </p-iftalabel>
+
+      <p-iftalabel class="field-spacing">
+        <p-password inputId="repeatPassword" formControlName="repeatPassword" [feedback]="false" [toggleMask]="true"></p-password>
+        <label for="repeatPassword">Repeat password</label>
+      </p-iftalabel>
+
+      <div class="field-spacing">
+        <p-checkbox formControlName="checkbox" inputId="acceptTerms" binary="true"></p-checkbox>
+        <label class="ml-2">
+          I accept the
+          <button type="button" class="p-link" (click)="showTerms()">terms of use</button>.
+        </label>
+      </div>
+
+      <p-button label="Register your account" class="w-full" (click)="register()"></p-button>
+    </form>
+  </p-card>
+
+  <p-dialog header="Terms of Use" [(visible)]="termsVisible" [modal]="true" [style]="{width: '600px'}">
+    <div style="max-height: 400px; overflow-y: auto;">
+      <!-- Add your terms of use content here -->
+      <p>Here are the terms of use...</p>
+    </div>
+  </p-dialog>
+</div>

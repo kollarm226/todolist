@@ -1,0 +1,18 @@
+<p-card header="Lists">
+  <div class="card">
+    <p-accordion [value]="0" *ngIf="tabs.length; else noList">
+      <p-accordion-panel *ngFor="let tab of tabs" [value]="tab.value">
+        <p-accordion-header>{{ tab.title }}</p-accordion-header>
+        <p-accordion-content>
+          <ul>
+            <li *ngFor="let item of tab.content">{{ item }}</li>
+          </ul>
+        </p-accordion-content>
+      </p-accordion-panel>
+    </p-accordion>
+
+    <ng-template #noList>
+      <p>No list yet.</p>
+    </ng-template>
+  </div>
+</p-card>

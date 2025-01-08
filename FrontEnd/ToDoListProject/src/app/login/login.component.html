@@ -1,0 +1,27 @@
+<div class="center-container">
+  <p-card header="Login" class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
+    <form [formGroup]="formGroup">
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-user"></p-inputicon>
+          <input pInputText id="username" autocomplete="off" formControlName="username"/>
+        </p-iconfield>
+        <label for="username">Username</label>
+      </p-iftalabel>
+
+      <p-ifta-label class="field-spacing">
+        <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
+        <label>Password</label>
+      </p-ifta-label>
+
+      <div class="forgot-password">
+        <a href="#" (click)="forgotPassword()">Forgot password?</a>
+      </div>
+    </form>
+
+      <ng-template pTemplate="footer">
+        <p-button label="Login" class="w-full" (click)="login()"></p-button>
+        <div class="signup-link"> Don't have an account? <a href="#" (click)="signUp()">Sign up</a></div>
+      </ng-template>
+  </p-card>
+</div>

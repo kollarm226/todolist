@@ -42,7 +42,7 @@ namespace TodoApp.API.Controllers
 
             return Ok(list);
         }
-        
+
         /*[HttpGet]
         public async Task<IActionResult> GetAllLists(int page = 1, int pageSize = 10)
         {
@@ -51,10 +51,10 @@ namespace TodoApp.API.Controllers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-    
+
             return Ok(new { TotalItems = totalItems, Lists = lists });
         }*/
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteList(int id)
         {
@@ -70,9 +70,20 @@ namespace TodoApp.API.Controllers
 
             return Ok(new { Message = $"List with ID = {id} has been deleted successfully." });
         }
-        
-        
-        
 
+        [HttpPost("{id}")]
+
+    public async Task<IActionResult> CreateList([FromBody] List list)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _dbContext.Lists.AddAsync(list);
+            await _dbContext.SaveChangesAsync();
+
+            return CreatedAtAction("GetListById", new { id = list.Id }, list);
+        }
     }
 }

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoApp.API.Data;
+using TodoApp.API.Models;
+
 namespace TodoApp.API.Controllers
 {
     [Route("api/[controller]")]
@@ -40,7 +42,8 @@ namespace TodoApp.API.Controllers
 
             return Ok(list);
         }
-        [HttpGet]
+        
+        /*[HttpGet]
         public async Task<IActionResult> GetAllLists(int page = 1, int pageSize = 10)
         {
             var totalItems = await _dbContext.Lists.CountAsync();
@@ -50,7 +53,8 @@ namespace TodoApp.API.Controllers
                 .ToListAsync();
     
             return Ok(new { TotalItems = totalItems, Lists = lists });
-        }
+        }*/
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteList(int id)
         {
@@ -66,5 +70,9 @@ namespace TodoApp.API.Controllers
 
             return Ok(new { Message = $"List with ID = {id} has been deleted successfully." });
         }
+        
+        
+        
+
     }
 }

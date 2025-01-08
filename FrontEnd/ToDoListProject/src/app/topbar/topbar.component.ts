@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Panel } from "primeng/panel";
+import { Panel } from 'primeng/panel';
 import { Avatar } from 'primeng/avatar';
 import { Popover } from 'primeng/popover';
 import { Button } from 'primeng/button';
-import { NgForOf } from '@angular/common';
+import { NgForOf, CommonModule } from '@angular/common'; // Import CommonModule
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
@@ -21,13 +21,13 @@ import { Dialog } from 'primeng/dialog';
     IconField,
     InputIcon,
     InputText,
-    Dialog
+    Dialog,
+    CommonModule // Add CommonModule here
   ],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent {
-
   @ViewChild('op') op!: Popover;
   menuItems = [
     { label: 'My account', action: 'My account' },

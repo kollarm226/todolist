@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/to-do-list-project",
             "index": "src/index.html",
@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ToDoListProject:build:production"
+              "browserTarget": "ToDoListProject:build:production"
             },
             "development": {
-              "buildTarget": "ToDoListProject:build:development"
+              "browserTarget": "ToDoListProject:build:development"
             }
           },
           "defaultConfiguration": "development"

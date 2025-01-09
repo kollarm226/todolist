@@ -22,7 +22,7 @@ namespace TodoApp.API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register{name}/{surname}/{password}/{email}")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
             if (_dbContext.Users.Any(x => x.email == user.email))
@@ -36,7 +36,7 @@ namespace TodoApp.API.Controllers
             return Ok("Registration successful");
         }
 
-        [HttpPost("login{email}/{password}")]
+        [HttpPost("login")]
         public IActionResult Login([FromRoute] User loginRequest)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.email == loginRequest.email);

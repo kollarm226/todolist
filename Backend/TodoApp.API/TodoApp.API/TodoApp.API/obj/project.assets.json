@@ -5861,23 +5861,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TheEn\\.nuget\\packages\\": {},
+    "C:\\Users\\palit\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TheEn\\Documents\\Projects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\TodoApp.API.csproj",
+      "projectUniqueName": "C:\\Users\\palit\\RiderProjects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\TodoApp.API.csproj",
       "projectName": "TodoApp.API",
-      "projectPath": "C:\\Users\\TheEn\\Documents\\Projects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\TodoApp.API.csproj",
-      "packagesPath": "C:\\Users\\TheEn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TheEn\\Documents\\Projects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\obj\\",
+      "projectPath": "C:\\Users\\palit\\RiderProjects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\TodoApp.API.csproj",
+      "packagesPath": "C:\\Users\\palit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\palit\\RiderProjects\\todolist\\Backend\\TodoApp.API\\TodoApp.API\\TodoApp.API\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\TheEn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\palit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5903,8 +5904,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net9.0": {

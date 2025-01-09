@@ -1,12 +1,23 @@
-﻿namespace TodoApp.API.Models
+﻿using System.ComponentModel;
+
+namespace TodoApp.API.Models
 {
     public class Todo
     {
         public Guid id { get; set; }
         public int? idList { get; set; }
         public string name { get; set; }
-        public Boolean? done { get; set; }
+        [DefaultValue(false)]
+        public bool done { get; set; }
         public int? priority { get; set; }
-        public Boolean? isDeleted { get; set; }
+        
+        [DefaultValue(false)]
+        public bool isDeleted { get; set; }
+
+
+        public Todo()
+        {
+            isDeleted = false;
+        }
     }
 }

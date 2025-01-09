@@ -20,11 +20,11 @@ namespace TodoApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllTodos()
         {
-            var todos = await _todoDbContext.Todos.ToListAsync();
+            var todos = await _todoDbContext.Todos.Where(todo => !todo.isDeleted).ToListAsync();
             return Ok(todos);
         }
 
-        [HttpPost("{id}/{name}/{priority}")]
+        [HttpPost("post")]
         public async Task<IActionResult> AddTodo(Todo todo)
         {
             todo.id = Guid.NewGuid();

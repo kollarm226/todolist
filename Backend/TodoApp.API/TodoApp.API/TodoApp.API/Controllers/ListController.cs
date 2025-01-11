@@ -11,38 +11,44 @@ namespace TodoApp.API.Controllers
     {
         private readonly TodoDbContext _dbContext;
 
-
         public ListsController(TodoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetLists()
         {
-
-            var lists = await _dbContext.Lists.ToListAsync();
-            return Ok(lists);
+            try
+            {
+                var lists = await _dbContext.Lists.ToListAsync();
+                return Ok(lists);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error. Please contact support.");
+            }
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
-
-            var list = await _dbContext.Lists.FindAsync(id);
-
-
-            if (list == null)
+            try
             {
-                return NotFound($"List with ID = {id} not found.");
+                var list = await _dbContext.Lists.FindAsync(id);
+
+                if (list == null)
+                {
+                    return NotFound($"List with ID = {id} not found.");
+                }
+
+                return Ok(list);
             }
-
-
-            return Ok(list);
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error. Please contact support.");
+            }
         }
-
         /*[HttpGet]
         public async Task<IActionResult> GetAllLists(int page = 1, int pageSize = 10)
         {
@@ -58,32 +64,45 @@ namespace TodoApp.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteList(int id)
         {
-            var list = await _dbContext.Lists.FindAsync(id);
-
-            if (list == null)
+            try
             {
-                return NotFound(new { Message = $"List with ID = {id} not found." });
+                var list = await _dbContext.Lists.FindAsync(id);
+
+                if (list == null)
+                {
+                    return NotFound(new { Message = $"List with ID = {id} not found." });
+                }
+
+                _dbContext.Lists.Remove(list);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok(new { Message = $"List with ID = {id} has been deleted successfully." });
             }
-
-            _dbContext.Lists.Remove(list);
-            await _dbContext.SaveChangesAsync();
-
-            return Ok(new { Message = $"List with ID = {id} has been deleted successfully." });
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error. Please contact support.");
+            }
         }
 
         [HttpPost("{id}")]
-
-    public async Task<IActionResult> CreateList([FromBody] List list)
+        public async Task<IActionResult> CreateList([FromBody] List list)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                await _dbContext.Lists.AddAsync(list);
+                await _dbContext.SaveChangesAsync();
+
+                return CreatedAtAction("GetPost", new { id = list.Id }, list);
             }
-
-            await _dbContext.Lists.AddAsync(list);
-            await _dbContext.SaveChangesAsync();
-
-            return CreatedAtAction("GetListById", new { id = list.Id }, list);
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error. Please contact support.");
+            }
         }
     }
 }

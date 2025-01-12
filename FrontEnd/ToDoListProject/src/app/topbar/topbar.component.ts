@@ -8,6 +8,8 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
 import { Dialog } from 'primeng/dialog';
+import {TasksComponent} from '../tasks/tasks.component';
+import {ListsComponent} from '../lists/lists.component';
 
 @Component({
   selector: 'app-topbar',
@@ -22,7 +24,10 @@ import { Dialog } from 'primeng/dialog';
     InputIcon,
     InputText,
     Dialog,
-    CommonModule // Add CommonModule here
+    CommonModule,
+    TasksComponent,
+    ListsComponent,
+    // Add CommonModule here
   ],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']

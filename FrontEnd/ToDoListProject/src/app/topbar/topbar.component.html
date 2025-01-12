@@ -1,10 +1,10 @@
-<p-panel [style]="{background: '#617691', color: 'white'}" styleClass="header-bar">
+<p-panel [style]="{background: '#464646', color: 'white'}" styleClass="header-bar">
   <div class="header-content flex items-center justify-between">
     <div class="flex items-center gap-2">
       <p-button type="button" [label]="'&#8942;'" (click)="toggle($event)" styleClass="min-w-48"></p-button>
     </div>
     <h1 class="flex-grow text-center">TaskHive</h1>
-    <p-avatar label="P" size="xlarge" shape="circle" styleClass="ml-2"></p-avatar>
+    <p-avatar label="P" size="xlarge" shape="circle" styleClass="ml-2" [style]="{ 'background-color': '#cc8899', color: '#1a2551' }"></p-avatar>
   </div>
   <p-iconfield iconPosition="left">
     <p-inputicon styleClass="pi pi-search" />
@@ -60,3 +60,5 @@
     </div>
   </div>
 </p-dialog>
+<app-lists></app-lists>
+<app-tasks></app-tasks>

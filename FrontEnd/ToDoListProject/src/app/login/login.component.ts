@@ -25,6 +25,7 @@ import {InputIcon} from 'primeng/inputicon';
     IftaLabel,
     IconField,
     InputIcon,
+    HeaderComponent,
 // Import HeaderComponent
   ],
   templateUrl: './login.component.html',

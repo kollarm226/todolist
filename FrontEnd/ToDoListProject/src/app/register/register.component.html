@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="center-container">
   <p-card header="Registration" class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
     <form [formGroup]="formGroup">
@@ -7,6 +8,9 @@
           <input pInputText id="username" autocomplete="off" formControlName="username"/>
         </p-iconfield>
         <label for="username">Username</label>
+        <div *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
+          <small class="p-error">Username is required.</small>
+        </div>
       </p-iftalabel>
 
       <p-iftalabel class="field-spacing">
@@ -15,23 +19,33 @@
           <input pInputText id="email" autocomplete="off" formControlName="email"/>
         </p-iconfield>
         <label for="email">Email</label>
+        <div *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+          <small class="p-error">Valid email is required.</small>
+        </div>
       </p-iftalabel>
 
       <p-iftalabel class="field-spacing">
         <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
         <label for="password">Password</label>
+        <div *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
+          <small class="p-error">Password is required.</small>
+        </div>
       </p-iftalabel>
 
       <p-iftalabel class="field-spacing">
-        <p-password inputId="repeatPassword" formControlName="repeatPassword" [feedback]="false" [toggleMask]="true"></p-password>
+        <p-password inputId="repeatPassword" formControlName="repeatPassword" [feedback]="false"
+                    [toggleMask]="true"></p-password>
         <label for="repeatPassword">Repeat password</label>
+        <div *ngIf="formGroup.get('repeatPassword')?.invalid && formGroup.get('repeatPassword')?.touched">
+          <small class="p-error">Passwords must match.</small>
+        </div>
       </p-iftalabel>
 
       <div class="field-spacing">
         <p-checkbox formControlName="checkbox" inputId="acceptTerms" binary="true"></p-checkbox>
         <label class="ml-2">
           I accept the
-          <button type="button" class="p-link" (click)="showTerms()">terms of use</button>.
+          <button type="button" class="p-link" (click)="showTerms()">terms of use</button>
         </label>
       </div>
 
@@ -41,8 +55,15 @@
 
   <p-dialog header="Terms of Use" [(visible)]="termsVisible" [modal]="true" [style]="{width: '600px'}">
     <div style="max-height: 400px; overflow-y: auto;">
-      <!-- Add your terms of use content here -->
-      <p>Here are the terms of use...</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis tristique imperdiet. Suspendisse at tempus ipsum. Duis consectetur egestas ligula, vitae pharetra lectus malesuada ac. Curabitur fringilla malesuada leo nec dignissim. Morbi hendrerit viverra auctor. Suspendisse tempor vestibulum molestie. Praesent mauris nisl, lobortis ac lorem nec, lobortis placerat massa. Ut pretium tristique ultrices. Donec in blandit ex.
+
+        Aenean mi orci, facilisis in scelerisque at, gravida quis turpis. Vivamus ex nisl, pretium eget elementum eget, commodo sed ipsum. Nam pretium blandit est, auctor vestibulum elit maximus condimentum. Suspendisse a molestie mauris. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed vestibulum neque vel metus ornare hendrerit. Vivamus sit amet lorem tempor, tincidunt nisi ut, rhoncus ante.
+
+        Vivamus non sem massa. Cras tristique finibus nunc a varius. Ut et leo in mauris volutpat varius non eu lorem. Donec id quam a quam bibendum venenatis. Curabitur tincidunt erat et lacus maximus, sed ultricies nibh egestas. Cras elementum, augue non tincidunt aliquet, lorem metus commodo diam, feugiat luctus augue massa eget nisl. Nunc non facilisis ipsum, eget viverra justo. Nulla aliquet in diam ut tempor. Nam dignissim ex lacus, vitae eleifend quam porta vitae.
+
+        Proin quis dui dignissim, pulvinar ligula vel, accumsan diam. Etiam accumsan et tellus a tempor. Aliquam ex quam, lobortis at turpis egestas, congue blandit lorem. Vestibulum non velit quis nisl pharetra egestas sit amet in mauris. Cras in dui lorem. Fusce sit amet erat quis augue venenatis aliquet. Pellentesque ac imperdiet risus. Fusce ullamcorper libero ullamcorper velit vulputate, in bibendum nibh rhoncus. Donec eleifend euismod ex. Suspendisse posuere, justo non ornare facilisis, elit velit blandit nulla, id volutpat erat dolor at sem.
+
+        Ut enim ante, scelerisque vel euismod eu, egestas sed diam. Sed porttitor, justo sit amet convallis eleifend, odio tellus ornare turpis, sed fringilla turpis purus nec tellus. Quisque a nunc sagittis, aliquam lectus cursus, laoreet sapien. Nam egestas nibh ultricies condimentum eleifend. Pellentesque leo dui, sodales eu mattis a, consectetur sed tortor. Integer sed auctor metus. Nam vel quam tellus. Morbi odio purus, faucibus vel sem non, imperdiet malesuada dui. Integer id dolor aliquam, sodales nunc ut, lacinia quam. Phasellus eget lobortis ligula. Fusce semper nunc tincidunt nibh tincidunt fringilla. Pellentesque a nisl iaculis, condimentum sapien sed, tincidunt magna. Mauris at odio nisl.</p>
     </div>
   </p-dialog>
 </div>

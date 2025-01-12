@@ -11,6 +11,7 @@ import { Card } from 'primeng/card';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { Dialog } from 'primeng/dialog';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,7 @@ import { Dialog } from 'primeng/dialog';
     IconField,
     InputIcon,
     Dialog,
+    HeaderComponent,
   ],
   providers: [MessageService]
 })

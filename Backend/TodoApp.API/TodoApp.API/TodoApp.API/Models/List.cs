@@ -2,7 +2,7 @@
 
 public class List
 {
-    public Guid Id { get; set; }
+    public Guid id { get; set; }
     public int id_user { get; set; }
     public string list_name { get; set; }
     public int icon { get; set; }

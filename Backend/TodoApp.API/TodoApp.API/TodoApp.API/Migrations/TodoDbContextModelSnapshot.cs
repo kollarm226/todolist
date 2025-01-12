@@ -24,7 +24,7 @@ namespace TodoApp.API.Migrations
 
             modelBuilder.Entity("TodoApp.API.Models.List", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -41,9 +41,26 @@ namespace TodoApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Lists");
+                });
+
+            modelBuilder.Entity("TodoApp.API.Models.ListUsers", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ListUsers");
                 });
 
             modelBuilder.Entity("TodoApp.API.Models.Todo", b =>

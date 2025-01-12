@@ -10,6 +10,8 @@ namespace TodoApp.API.Data
         public DbSet<Todo> Todos { get; set; }
         public DbSet<List> Lists { get; set; }
         public DbSet<User> Users { get; set; }
+        
+        public DbSet<ListUsers> ListUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

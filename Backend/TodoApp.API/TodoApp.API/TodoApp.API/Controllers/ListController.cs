@@ -97,7 +97,7 @@ namespace TodoApp.API.Controllers
                 await _dbContext.Lists.AddAsync(list);
                 await _dbContext.SaveChangesAsync();
 
-                return CreatedAtAction("GetPost", new { id = list.Id }, list);
+                return CreatedAtAction("GetPost", new { id = list.id }, list);
             }
             catch (Exception ex)
             {

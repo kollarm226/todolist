@@ -14,7 +14,6 @@ import {Dialog} from 'primeng/dialog';
 import {HeaderComponent} from '../header/header.component';
 import {AuthServiceService} from '../auth-service.service';
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',

@@ -12,7 +12,7 @@ using TodoApp.API.Data;
 namespace TodoApp.API.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20250113105822_Initial")]
+    [Migration("20250113152815_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,8 +45,6 @@ namespace TodoApp.API.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Lists");
                 });
@@ -81,8 +79,6 @@ namespace TodoApp.API.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("ListID");
-
                     b.ToTable("Todos");
                 });
 
@@ -109,38 +105,6 @@ namespace TodoApp.API.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("TodoApp.API.Models.List", b =>
-                {
-                    b.HasOne("TodoApp.API.Models.User", "User")
-                        .WithMany("Lists")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TodoApp.API.Models.Todo", b =>
-                {
-                    b.HasOne("TodoApp.API.Models.List", "List")
-                        .WithMany("Todos")
-                        .HasForeignKey("ListID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("List");
-                });
-
-            modelBuilder.Entity("TodoApp.API.Models.List", b =>
-                {
-                    b.Navigation("Todos");
-                });
-
-            modelBuilder.Entity("TodoApp.API.Models.User", b =>
-                {
-                    b.Navigation("Lists");
                 });
 #pragma warning restore 612, 618
         }

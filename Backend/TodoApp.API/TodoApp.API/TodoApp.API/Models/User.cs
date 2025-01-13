@@ -7,5 +7,4 @@ public class User
     public string? surname { get; set; }
     public string email { get; set; }
     public string password { get; set; }
-    public ICollection<List> Lists { get; set; }
 }

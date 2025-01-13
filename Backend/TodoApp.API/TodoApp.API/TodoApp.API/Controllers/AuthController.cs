@@ -37,7 +37,7 @@ namespace TodoApp.API.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromRoute] User loginRequest)
+        public IActionResult Login([FromBody] User loginRequest)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.email == loginRequest.email);
             if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))

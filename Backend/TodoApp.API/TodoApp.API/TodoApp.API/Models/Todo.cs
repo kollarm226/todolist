@@ -10,7 +10,6 @@ namespace TodoApp.API.Models
         [DefaultValue(false)]
         public bool isDone { get; set; }
         public int priority { get; set; }
-        public List List { get; set; }
         [DefaultValue(false)]
         public bool isDeleted { get; set; }
         

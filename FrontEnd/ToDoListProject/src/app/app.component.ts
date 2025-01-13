@@ -1,15 +1,13 @@
 import { Component, importProvidersFrom } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import {RouterOutlet, RouterModule, RouterLink} from '@angular/router';
 import { routes } from './app.routes';
 import { provideRouter } from '@angular/router';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { ButtonModule } from 'primeng/button';
-import { RegisterComponent } from './register/register.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
-import { TopbarComponent } from './topbar/topbar.component';
-import { ListsComponent } from './lists/lists.component';
-import { TasksComponent } from './tasks/tasks.component';
+import {provideHttpClient, withFetch} from '@angular/common/http';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {ListsComponent} from './lists/lists.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +17,8 @@ import { TasksComponent } from './tasks/tasks.component';
   imports: [
     RouterOutlet,
     ButtonModule,
-    RegisterComponent,
-    HeaderComponent,
-    LoginComponent,
-    TopbarComponent,
-    ListsComponent,
-    TasksComponent,
-    RouterModule
+    RouterModule,
+    CommonModule
   ]
 })
 export class AppComponent {
@@ -35,6 +28,7 @@ export class AppComponent {
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(BrowserModule, RouterModule.forRoot(routes))
+    importProvidersFrom(BrowserModule, RouterModule.forRoot(routes)),
+    provideAnimations(),
   ]
-}).catch(err => console.error(err));
+}).catch(err => console.error());

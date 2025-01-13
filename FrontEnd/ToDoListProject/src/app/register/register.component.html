@@ -26,7 +26,7 @@
 
       <p-iftalabel class="field-spacing">
         <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
-        <label for="password">Password</label>
+        <label>Password</label>
         <div *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
           <small class="p-error">Password is required.</small>
         </div>
@@ -35,7 +35,7 @@
       <p-iftalabel class="field-spacing">
         <p-password inputId="repeatPassword" formControlName="repeatPassword" [feedback]="false"
                     [toggleMask]="true"></p-password>
-        <label for="repeatPassword">Repeat password</label>
+        <label>Repeat password</label>
         <div *ngIf="formGroup.get('repeatPassword')?.invalid && formGroup.get('repeatPassword')?.touched">
           <small class="p-error">Passwords must match.</small>
         </div>

@@ -12,7 +12,7 @@ using TodoApp.API.Data;
 namespace TodoApp.API.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20250112210622_Initial")]
+    [Migration("20250113105822_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -31,13 +31,13 @@ namespace TodoApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("char(36)");
+
                     b.Property<int>("color")
                         .HasColumnType("int");
 
                     b.Property<int>("icon")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_user")
                         .HasColumnType("int");
 
                     b.Property<string>("list_name")
@@ -46,24 +46,9 @@ namespace TodoApp.API.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("UserID");
+
                     b.ToTable("Lists");
-                });
-
-            modelBuilder.Entity("TodoApp.API.Models.ListUsers", b =>
-                {
-                    b.Property<Guid>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("ListId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ListUsers");
                 });
 
             modelBuilder.Entity("TodoApp.API.Models.Todo", b =>
@@ -72,9 +57,8 @@ namespace TodoApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int?>("idList")
-                        .HasColumnType("int")
-                        .HasColumnName("idList");
+                    b.Property<Guid>("ListID")
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("isDeleted")
                         .ValueGeneratedOnAdd()
@@ -92,21 +76,21 @@ namespace TodoApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("priority")
+                    b.Property<int>("priority")
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("ListID");
 
                     b.ToTable("Todos");
                 });
 
             modelBuilder.Entity("TodoApp.API.Models.User", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -125,6 +109,38 @@ namespace TodoApp.API.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TodoApp.API.Models.List", b =>
+                {
+                    b.HasOne("TodoApp.API.Models.User", "User")
+                        .WithMany("Lists")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TodoApp.API.Models.Todo", b =>
+                {
+                    b.HasOne("TodoApp.API.Models.List", "List")
+                        .WithMany("Todos")
+                        .HasForeignKey("ListID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("List");
+                });
+
+            modelBuilder.Entity("TodoApp.API.Models.List", b =>
+                {
+                    b.Navigation("Todos");
+                });
+
+            modelBuilder.Entity("TodoApp.API.Models.User", b =>
+                {
+                    b.Navigation("Lists");
                 });
 #pragma warning restore 612, 618
         }

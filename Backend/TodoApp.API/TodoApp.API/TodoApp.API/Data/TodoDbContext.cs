@@ -10,8 +10,6 @@ namespace TodoApp.API.Data
         public DbSet<Todo> Todos { get; set; }
         public DbSet<List> Lists { get; set; }
         public DbSet<User> Users { get; set; }
-        
-        public DbSet<ListUsers> ListUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,7 +17,9 @@ namespace TodoApp.API.Data
             modelBuilder.Entity<Todo>().Property(t => t.isDeleted).HasDefaultValue(false);  
             modelBuilder.Entity<Todo>().Property(t => t.isDeleted).HasColumnName("isDeleted");
             modelBuilder.Entity<Todo>().Property(t => t.isDone).HasColumnName("isDone");
-            modelBuilder.Entity<Todo>().Property(t => t.idList).HasColumnName("idList");
+            
+            modelBuilder.Entity<List>() .HasOne(u => u.User) .WithMany(l => l.Lists) .HasForeignKey(u => u.UserID);
+            modelBuilder.Entity<Todo>() .HasOne(l => l.List) .WithMany(t => t.Todos) .HasForeignKey(l => l.ListID);
         }
     }
 }

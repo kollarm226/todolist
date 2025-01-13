@@ -18,54 +18,54 @@ namespace TodoApp.API.Controllers
 
         // Method that returns all tasks that are NOT deleted.
         [HttpGet("notdeleted")]
-        public async Task<IActionResult> GetAllNotDeletedTodos()                                           
-        {
-           
-            var todos = await _todoDbContext.Todos.Where(todo => !todo.isDeleted).ToListAsync();
-            
-            return Ok(todos);
+public async Task<IActionResult> GetAllNotDeletedTodos([FromQuery] Guid listId)                                           
+{
+   
+    var todos = await _todoDbContext.Todos.Where(todo => todo.ListID == listId && !todo.isDeleted).ToListAsync();
+    
+    return Ok(todos);
         }
         
         // Method that returns all tasks that are deleted.
         [HttpGet("deleted")]
-        public async Task<IActionResult> GetAllDeletedTodos()                                              
+public async Task<IActionResult> GetAllDeletedTodos([FromQuery] Guid listId)                                              
+{
+    try
+    {
+        if (!await AreThereAnyTodosAsync())
         {
-            try
-            {
-                if (!await AreThereAnyTodosAsync())
-                {
-                    return NotFound("No tasks found in the database.");
-                }
-            
-                var todos = await _todoDbContext.Todos.Where(todo => todo.isDeleted).ToListAsync();
-                return Ok(todos);  
-            }
+            return NotFound("No tasks found in the database.");
+        }
+        var todos = await _todoDbContext.Todos.Where(todo => todo.ListID == listId && todo.isDeleted).ToListAsync();
+        return Ok(todos);  
+    }
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error. Please contact support.");
             }
         }
         
-        // Method that returns all tasks. 
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllTodos()                                                          
+        // Method that returns all tasks from one list based on ListID. 
+[HttpGet("all/{listId}")]
+public async Task<IActionResult> GetAllTodos([FromRoute] Guid listId)                                                          
+{
+    try
+    {
+        var todos = await _todoDbContext.Todos.Where(todo => todo.ListID == listId).ToListAsync();
+        
+        if (!todos.Any())
         {
-            try
-            {
-                if (!await AreThereAnyTodosAsync())
-                {
-                    return NotFound("No tasks found in the database.");
-                }
-
-                var todos = await _todoDbContext.Todos.ToListAsync();
-                return Ok(todos);
-            }
-           
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error. Please contact support.");
-            }
+            return NotFound($"No tasks found for the ListID: {listId}.");
         }
+
+        return Ok(todos);
+    }
+   
+    catch (Exception ex)
+    {
+        return StatusCode(500, "Internal server error. Please contact support.");
+    }
+}
         
         // Method that add new task. It generates new ID for that task.
         [HttpPost("post")]

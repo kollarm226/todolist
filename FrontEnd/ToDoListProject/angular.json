@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ToDoListProject:build:production"
+              "buildTarget": "ToDoListProject:build:production"
             },
             "development": {
-              "browserTarget": "ToDoListProject:build:development"
+              "buildTarget": "ToDoListProject:build:development"
             }
           },
           "defaultConfiguration": "development"

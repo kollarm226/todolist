@@ -12,8 +12,9 @@ import {IconField} from 'primeng/iconfield';
 import {InputIcon} from 'primeng/inputicon';
 import {Dialog} from 'primeng/dialog';
 import {HeaderComponent} from '../header/header.component';
-import {AuthServiceService} from '../auth-service.service';
+import {AuthService} from '../auth.service';
 import {CommonModule} from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -34,9 +35,9 @@ import {CommonModule} from '@angular/common';
     InputIcon,
     Dialog,
     HeaderComponent,
-    CommonModule,
+    CommonModule
      ],
-  providers: [MessageService ]
+  providers: [MessageService],
 
 })
 export class RegisterComponent {
@@ -44,7 +45,7 @@ export class RegisterComponent {
   value: any;
   termsVisible: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: AuthServiceService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -59,7 +60,12 @@ export class RegisterComponent {
 
   register(): void {
     if (this.formGroup.valid) {
-      this.authService.register(this.formGroup.value).subscribe({
+      this.authService.register({
+        name: this.formGroup.get('username'),
+        surname: this.formGroup.get('username'),
+        email: this.formGroup.get('email')?.value,
+        password: this.formGroup.get('password')?.value
+      }).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',

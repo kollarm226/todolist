@@ -28,6 +28,14 @@ builder.Services.AddSwaggerGen(options =>
                Description = "An ASP.NET Core Web API for managing Todo items",
            });
     });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+        builder.WithOrigins("http://localhost:4200") // Allow this origin
+            .AllowAnyMethod()                   
+            .AllowAnyHeader()
+             .AllowCredentials());
+});
 
 // Add authentication
 string? jwtSecret = configuration["JWTSettings:Secret"];
@@ -102,7 +110,7 @@ app.MapGet("/", context =>
     return Task.CompletedTask;
 });
 
-app.UseCors("AllowAngularApp");
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseAuthorization();

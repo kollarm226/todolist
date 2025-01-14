@@ -111,9 +111,9 @@ app.MapGet("/", context =>
 });
 
 app.UseCors("AllowSpecificOrigin");
-app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseAuthentication();
 app.MapControllers();
 app.Run();
 

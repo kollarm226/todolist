@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, map, Observable, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,27 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  register(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, user);
+  register(user: { email: string; password: string; name: string }): Observable<string> {
+    return this.http
+      .post(`${this.apiUrl}/register`, user, {responseType: 'text'}) // Explicitly expect a text response
+      .pipe(
+        map((response: string) => {
+          console.log('Registration successful:', response);
+          return response; // Return the success message
+        }),
+        catchError((error) => {
+          console.error('Registration error:', error);
+          if (error.error instanceof ProgressEvent) {
+            return throwError('Network error occurred. Please try again.');
+          }
+          if (typeof error.error === 'string') {
+            return throwError(error.error);
+          }
+          return throwError('An unexpected error occurred.');
+        })
+      );
   }
+
 
   login(user: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, user);

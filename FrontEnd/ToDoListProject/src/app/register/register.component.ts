@@ -14,7 +14,6 @@ import {Dialog} from 'primeng/dialog';
 import {HeaderComponent} from '../header/header.component';
 import {AuthService} from '../auth.service';
 import {CommonModule} from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +35,7 @@ import { provideHttpClient } from '@angular/common/http';
     Dialog,
     HeaderComponent,
     CommonModule
-     ],
+  ],
   providers: [MessageService],
 
 })
@@ -50,7 +49,8 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       repeatPassword: ['', Validators.required],
@@ -60,19 +60,23 @@ export class RegisterComponent {
 
   register(): void {
     if (this.formGroup.valid) {
-      this.authService.register({
-        name: this.formGroup.get('username'),
-        surname: this.formGroup.get('username'),
+      const registrationData = {
+        name: this.formGroup.get('name')?.value,
+        surname: this.formGroup.get('surname')?.value,
         email: this.formGroup.get('email')?.value,
         password: this.formGroup.get('password')?.value
-      }).subscribe({
+      };
+
+      this.authService.register(registrationData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Registration Successful',
             detail: 'You have been registered!'
           });
-        }, error: () => {
+        },
+        error: (err) => {
+          console.error('Error during registration:', err);
           this.messageService.add({
             severity: 'error',
             summary: 'Registration Failed',
@@ -88,6 +92,7 @@ export class RegisterComponent {
       });
     }
   }
+
 
   showTerms() {
     this.termsVisible = true;

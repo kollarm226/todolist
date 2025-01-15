@@ -5,11 +5,21 @@
       <p-iftalabel class="field-spacing">
         <p-iconfield>
           <p-inputicon class="pi pi-user"></p-inputicon>
-          <input pInputText id="username" autocomplete="off" formControlName="username"/>
+          <input autocomplete="off" formControlName="name" id="name" pInputText/>
         </p-iconfield>
-        <label for="username">Username</label>
-        <div *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
-          <small class="p-error">Username is required.</small>
+        <label for="name">Name</label>
+        <div *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
+          <small class="p-error">Name is required.</small>
+        </div>
+      </p-iftalabel>
+      <p-iftalabel class="field-spacing">
+        <p-iconfield>
+          <p-inputicon class="pi pi-user"></p-inputicon>
+          <input autocomplete="off" formControlName="surname" id="surname" pInputText/>
+        </p-iconfield>
+        <label for="surname">Surname</label>
+        <div *ngIf="formGroup.get('surname')?.invalid && formGroup.get('surname')?.touched">
+          <small class="p-error">Surname is required.</small>
         </div>
       </p-iftalabel>
 

@@ -26,7 +26,6 @@ import {InputIcon} from 'primeng/inputicon';
     IconField,
     InputIcon,
     HeaderComponent,
-// Import HeaderComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

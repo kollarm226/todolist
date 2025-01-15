@@ -6,7 +6,6 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { ButtonModule } from 'primeng/button';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import {AuthService} from './auth.service';
 
 @Component({
   selector: 'app-root',

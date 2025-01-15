@@ -32,6 +32,11 @@ namespace TodoApp.API.Controllers
                 return BadRequest("Email already exists");
             }
 
+            if (!IsValidEmail(user.email))
+            {
+                return BadRequest("Invalid email format");
+            }
+            
             if (!IsValidPassword(user.password))
             {
                 return BadRequest("Password must be at least 8 characters long and contain a mix of " +
@@ -49,6 +54,12 @@ namespace TodoApp.API.Controllers
         {
             var passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
             return Regex.IsMatch(password, passwordPattern);
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern);
         }
 
         [HttpPost("login")]

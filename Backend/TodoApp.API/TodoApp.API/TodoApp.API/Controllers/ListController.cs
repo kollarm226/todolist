@@ -31,7 +31,7 @@ namespace TodoApp.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPost(int id)
+        public async Task<IActionResult> GetPost(Guid id)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace TodoApp.API.Controllers
         }*/
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteList(int id)
+        public async Task<IActionResult> DeleteList(Guid id)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace TodoApp.API.Controllers
             }
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         public async Task<IActionResult> CreateList([FromBody] List list)
         {
             try
@@ -106,3 +106,4 @@ namespace TodoApp.API.Controllers
         }
     }
 }
+

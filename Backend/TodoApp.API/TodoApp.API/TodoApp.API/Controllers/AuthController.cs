@@ -27,7 +27,7 @@ namespace TodoApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
-            if (_dbContext.Users.Any(x => x.email == user.email))
+            if (await _dbContext.Users.AnyAsync(x => x.email == user.email))
             {
                 return BadRequest("Email already exists");
             }
@@ -45,8 +45,9 @@ namespace TodoApp.API.Controllers
 
             user.id = Guid.NewGuid();
             user.password = PasswordHasher.HashPassword(user.password);
-            _dbContext.Users.Add(user);
+            await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
+            
             return Ok("Registration successful");
         }
 

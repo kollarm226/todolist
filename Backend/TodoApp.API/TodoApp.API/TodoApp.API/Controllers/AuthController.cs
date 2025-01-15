@@ -68,7 +68,7 @@ namespace TodoApp.API.Controllers
         {
             try
             {
-                var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.email == loginRequest.email);
+                var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.email == loginRequest.email);
                 if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))
                 {
                     return Unauthorized("Invalid email or password");

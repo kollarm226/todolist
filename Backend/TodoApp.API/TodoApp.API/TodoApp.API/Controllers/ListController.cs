@@ -93,6 +93,8 @@ namespace TodoApp.API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+                
+                list.id = Guid.NewGuid();
 
                 await _dbContext.Lists.AddAsync(list);
                 await _dbContext.SaveChangesAsync();

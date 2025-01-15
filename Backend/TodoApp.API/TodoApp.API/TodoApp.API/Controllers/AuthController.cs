@@ -65,39 +65,50 @@ namespace TodoApp.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] User loginRequest)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.email == loginRequest.email);
-            if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))
+            try
             {
-                return Unauthorized("Invalid email or password");
-            }
+                var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.email == loginRequest.email);
+                if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))
+                {
+                    return Unauthorized("Invalid email or password");
+                }
 
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.name),
-                new Claim(JwtRegisteredClaimNames.Email, user.email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.name),
+                    new Claim(JwtRegisteredClaimNames.Email, user.email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
 
-            var jwtSecret = _configuration["JWTSettings:Secret"];
-            if (string.IsNullOrEmpty(jwtSecret))
-            {
-                throw new InvalidOperationException("JWT Secret is not configured properly.");
+                var jwtSecret = _configuration["JWTSettings:Secret"];
+                if (string.IsNullOrEmpty(jwtSecret))
+                {
+                    throw new InvalidOperationException("JWT Secret is not configured properly.");
+                }
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWTSettings:Issuer"],
+                    audience: _configuration["JWTSettings:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddHours(1),
+                    signingCredentials: credentials
+                );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                });
             }
-            
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWTSettings:Issuer"],
-                audience: _configuration["JWTSettings:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: credentials
-            );
-            
-            return Ok(new
+            catch (DbUpdateException ex)
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+                return StatusCode(500, "Internal server error. Please contact support.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An unexpected error occured. Please contact support.");
+            }
         }
     }
 }

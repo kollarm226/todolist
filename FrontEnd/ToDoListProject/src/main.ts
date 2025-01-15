@@ -1,12 +1,9 @@
-import { Component, importProvidersFrom } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
-import { provideRouter } from '@angular/router';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { ButtonModule } from 'primeng/button';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import {routes} from './app/app.routes';
+import {Component} from '@angular/core';
+import {RouterOutlet, RouterModule} from '@angular/router';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {ButtonModule} from 'primeng/button';
+import {CommonModule} from '@angular/common';
+import {appConfig} from './app/app.config';
 
 @Component({
   selector: 'app-root',
@@ -25,10 +22,6 @@ export class AppComponent {
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes),
-    importProvidersFrom(BrowserModule, RouterModule.forRoot(routes)),
-    provideAnimations(),
-    provideHttpClient(withFetch()),
+  providers: [...appConfig.providers
   ]
 }).catch(err => console.error(err));

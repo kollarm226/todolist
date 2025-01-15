@@ -7,6 +7,7 @@ using TodoApp.API.Data;
 using TodoApp.API.Models;
 using TodoApp.API.Resources;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace TodoApp.API.Controllers
 {
@@ -51,9 +52,9 @@ namespace TodoApp.API.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User loginRequest)
+        public async Task<ActionResult> Login([FromBody] User loginRequest)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.email == loginRequest.email);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.email == loginRequest.email);
             if (user == null || !PasswordHasher.VerifyPassword(loginRequest.password, user.password))
             {
                 return Unauthorized("Invalid email or password");
@@ -71,9 +72,9 @@ namespace TodoApp.API.Controllers
             {
                 throw new InvalidOperationException("JWT Secret is not configured properly.");
             }
+            
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWTSettings:Issuer"],
                 audience: _configuration["JWTSettings:Audience"],

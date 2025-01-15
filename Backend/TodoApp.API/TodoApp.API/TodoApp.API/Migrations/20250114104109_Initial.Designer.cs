@@ -12,7 +12,7 @@ using TodoApp.API.Data;
 namespace TodoApp.API.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20250113152815_Initial")]
+    [Migration("20250114104109_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -42,7 +42,8 @@ namespace TodoApp.API.Migrations
 
                     b.Property<string>("list_name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("id");
 

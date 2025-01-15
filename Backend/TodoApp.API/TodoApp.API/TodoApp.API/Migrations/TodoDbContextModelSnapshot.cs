@@ -39,7 +39,8 @@ namespace TodoApp.API.Migrations
 
                     b.Property<string>("list_name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("id");
 

@@ -20,7 +20,7 @@ namespace TodoApp.API.Migrations
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    list_name = table.Column<string>(type: "longtext", nullable: false)
+                    list_name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     icon = table.Column<int>(type: "int", nullable: false),
                     color = table.Column<int>(type: "int", nullable: false)

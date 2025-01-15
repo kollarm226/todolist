@@ -17,6 +17,7 @@ namespace TodoApp.API.Data
             modelBuilder.Entity<Todo>().Property(t => t.isDeleted).HasDefaultValue(false);  
             modelBuilder.Entity<Todo>().Property(t => t.isDeleted).HasColumnName("isDeleted");
             modelBuilder.Entity<Todo>().Property(t => t.isDone).HasColumnName("isDone");
+            modelBuilder.Entity<List>().Property(t => t.list_name).HasMaxLength(50);
         }
     }
 }

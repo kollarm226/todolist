@@ -36,6 +36,12 @@ namespace TodoApp.API.Controllers
             return Ok("Registration successful");
         }
 
+        private bool IsValidPassword(string password)
+        {
+            var passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            return Regex.IsMatch(password, passwordPattern);
+        }
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] User loginRequest)
         {

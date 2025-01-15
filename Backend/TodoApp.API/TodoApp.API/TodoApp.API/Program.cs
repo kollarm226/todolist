@@ -28,6 +28,7 @@ builder.Services.AddSwaggerGen(options =>
                Description = "An ASP.NET Core Web API for managing Todo items",
            });
     });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", builder =>
@@ -116,11 +117,3 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
 app.Run();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngularApp",
-        policy => policy.WithOrigins("http://localhost:4200")  // Update with Angular dev server URL
-            .AllowAnyHeader()
-            .AllowAnyMethod());
-});

@@ -6,6 +6,7 @@ using System.Text;
 using TodoApp.API.Data;
 using TodoApp.API.Models;
 using TodoApp.API.Resources;
+using System.Text.RegularExpressions;
 
 namespace TodoApp.API.Controllers
 {
@@ -30,6 +31,13 @@ namespace TodoApp.API.Controllers
                 return BadRequest("Email already exists");
             }
 
+            if (!IsValidPassword(user.password))
+            {
+                return BadRequest("Password must be at least 8 characters long and contain a mix of " +
+                                            "uppercase, lowercase, numbers, and special characters.");
+            }
+
+            user.id = Guid.NewGuid();
             user.password = PasswordHasher.HashPassword(user.password);
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();

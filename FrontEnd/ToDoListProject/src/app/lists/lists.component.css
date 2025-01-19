@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%; /* 1/5 of the screen width */
+  margin-right: 20px;
+
+}
+
+.content {
+  width: 80%; /* Remaining space for the main content */
+}
+
+
+.task {
+
+}

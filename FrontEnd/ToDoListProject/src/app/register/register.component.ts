@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -14,6 +14,8 @@ import {Dialog} from 'primeng/dialog';
 import {HeaderComponent} from '../header/header.component';
 import {AuthService} from '../auth.service';
 import {CommonModule} from '@angular/common';
+import {Toast} from 'primeng/toast';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -34,17 +36,17 @@ import {CommonModule} from '@angular/common';
     InputIcon,
     Dialog,
     HeaderComponent,
-    CommonModule
+    CommonModule,
+    Toast
   ],
-  providers: [MessageService],
 
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   formGroup!: FormGroup;
   value: any;
   termsVisible: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -74,21 +76,17 @@ export class RegisterComponent {
             summary: 'Registration Successful',
             detail: 'You have been registered!'
           });
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3500);
         },
         error: (err) => {
-          console.error('Error during registration:', err);
           this.messageService.add({
             severity: 'error',
             summary: 'Registration Failed',
             detail: 'An error occurred while registering.'
           });
         }
-      });
-    } else {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Form Incomplete',
-        detail: 'Please complete all required fields.'
       });
     }
   }

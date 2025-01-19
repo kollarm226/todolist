@@ -4,25 +4,36 @@
     <form [formGroup]="formGroup">
       <p-iftalabel class="field-spacing">
         <p-iconfield>
-          <p-inputicon class="pi pi-user"></p-inputicon>
-          <input type="text" pInputText  formControlName="username"/>
+          <p-inputicon class="pi pi-envelope"></p-inputicon>
+          <input autocomplete="off" formControlName="email" id="email" pInputText/>
         </p-iconfield>
-        <label >Username</label>
+        <label for="email">Email</label>
+        <div *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+          <small class="p-error">Valid email is required.</small>
+        </div>
       </p-iftalabel>
 
-      <p-ifta-label class="field-spacing">
-        <p-password inputId="password" formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
-        <label>Password</label>
-      </p-ifta-label>
+      <p-iftalabel class="field-spacing">
+        <div class="card flex justify-center">
+          <p-password [feedback]="false" [toggleMask]="true" formControlName="password" inputId="password"></p-password>
+          <label>Password</label>
+        </div>
+        <div *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
+          <small class="p-error">Password is required.</small>
+        </div>
+      </p-iftalabel>
 
       <div class="forgot-password">
+        <!--        TODO-->
         <a href="#" (click)="forgotPassword()">Forgot password?</a>
       </div>
-    </form>
 
-      <ng-template pTemplate="footer">
-        <p-button label="Login" class="w-full" (click)="login()"></p-button>
-        <div class="signup-link"> Don't have an account? <a href="#" (click)="signUp()">Sign up</a></div>
-      </ng-template>
+      <p-button (click)="login()" [disabled]="!formGroup.valid" class="w-full" label="Login"></p-button>
+      <div class="signup-link">
+        <!--        TODO-->
+        Don't have an account? <a (click)="signUp()" href="#">Sign up</a>
+      </div>
+    </form>
   </p-card>
 </div>
+<p-toast></p-toast>

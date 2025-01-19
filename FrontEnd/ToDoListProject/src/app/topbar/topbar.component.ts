@@ -1,30 +1,20 @@
 import {Component, ViewChild} from '@angular/core';
 import {Panel} from 'primeng/panel';
-import {Avatar} from 'primeng/avatar';
 import {Popover} from 'primeng/popover';
 import {Button} from 'primeng/button';
-import {NgForOf, CommonModule} from '@angular/common'; // Import CommonModule
-import {IconField} from 'primeng/iconfield';
-import {InputIcon} from 'primeng/inputicon';
-import {InputText} from 'primeng/inputtext';
+import {CommonModule, NgForOf} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
-import {ListsComponent} from '../lists/lists.component';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
   imports: [
     Panel,
-    Avatar,
-    Popover,
     Button,
     NgForOf,
-    IconField,
-    InputIcon,
-    InputText,
     Dialog,
     CommonModule,
-    ListsComponent,
+
   ],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']

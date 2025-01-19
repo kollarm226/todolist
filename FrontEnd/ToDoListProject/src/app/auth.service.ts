@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = 'http://localhost:5186/api/auth';
 
   constructor(private http: HttpClient) {
@@ -14,27 +14,43 @@ export class AuthService {
 
   register(user: { email: string; password: string; name: string }): Observable<string> {
     return this.http
-      .post(`${this.apiUrl}/register`, user, {responseType: 'text'}) // Explicitly expect a text response
+      .post(`${this.apiUrl}/register`, user, {responseType: 'text'})
       .pipe(
-        map((response: string) => {
-          console.log('Registration successful:', response);
-          return response; // Return the success message
-        }),
+        map((response: string) => response),
         catchError((error) => {
           console.error('Registration error:', error);
-          if (error.error instanceof ProgressEvent) {
-            return throwError('Network error occurred. Please try again.');
-          }
-          if (typeof error.error === 'string') {
-            return throwError(error.error);
-          }
-          return throwError('An unexpected error occurred.');
+          return throwError(error.error || 'An unexpected error occurred.');
         })
       );
   }
 
+  login(user: { email: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, user).pipe(
+      map((response) => {
+        localStorage.setItem('token', response.token);
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Login error:', error);
+        return throwError(error.error || 'An unexpected error occurred.');
+      })
+    );
+  }
 
-  login(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, user);
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getLoggedInUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 }

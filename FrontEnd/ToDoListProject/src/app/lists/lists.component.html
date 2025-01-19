@@ -1,18 +1,62 @@
-<p-card header="Lists">
-  <div class="card">
-    <p-accordion [value]="0" *ngIf="tabs.length; else noList">
-      <p-accordion-panel *ngFor="let tab of tabs" [value]="tab.value">
-        <p-accordion-header>{{ tab.title }}</p-accordion-header>
-        <p-accordion-content>
-          <ul>
-            <li *ngFor="let item of tab.content">{{ item }}</li>
-          </ul>
-        </p-accordion-content>
-      </p-accordion-panel>
-    </p-accordion>
+<div class="container">
+  <div class="sidebar">
+    <p-card class="list" header="Lists">
+      <p-accordion *ngIf="tabs.length; else noList" [value]="0">
+        <p-accordion-panel *ngFor="let tab of tabs" [value]="tab.value">
+          <p-accordion-header>{{ tab.title }}</p-accordion-header>
+          <p-accordion-content>
+            <ul>
+              <li *ngFor="let item of tab.content">{{ item }}</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
 
-    <ng-template #noList>
-      <p>No list yet.</p>
-    </ng-template>
+      <ng-template #noList>
+        <p>No list yet.</p>
+      </ng-template>
+    </p-card>
   </div>
-</p-card>
+  <div class="content">
+    <p-floatlabel variant="on">
+      <input [(ngModel)]="value3" autocomplete="off" id="Add new Todo" pInputText/>
+      <label>Add new Todo</label>
+      <p-button (click)="addTask()" class="task" label="Add"/>
+    </p-floatlabel>
+
+
+    <div *ngIf="uncompletedTasks.length || completedTasks.length; else noTasks">
+      <p-picklist [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }" [source]="uncompletedTasks"
+                  [targetStyle]="{ height: '30rem' }" [target]="completedTasks" breakpoint="1400px">
+        <ng-template let-item pTemplate="item">
+          <span class="white-text">{{ item.name }}</span>
+        </ng-template>
+      </p-picklist>
+    </div>
+
+    <ng-template #noTasks>
+      <p class="white-text">There are no tasks available at the moment. Click on + to add new list.</p>
+    </ng-template>
+
+    <p-button (click)="showDialog()" icon="pi pi-plus"/>
+  </div>
+</div>
+
+
+<p-dialog [(visible)]="visible" [contentStyle]="{'overflow' : 'visible'}" [modal]="true" [style]="{ width: '25rem' }"
+          header="Add list">
+  <div class="flex items-center gap-4 mb-4">
+    <label class="font-semibold w-24" for="listname">List name</label>
+    <input autocomplete="off" class="flex-auto" id="listname" pInputText/>
+  </div>
+  <div class="flex items-center gap-4 mb-4">
+    <label class="font-semibold w-24">Color</label>
+    <div class="card flex justify-center">
+      <p-colorpicker [(ngModel)]="color"></p-colorpicker>
+    </div>
+  </div>
+  <div class="flex justify-end gap-2">
+    <p-button (click)="visible = false" label="Cancel" severity="secondary"/>
+    <p-button (click)="visible = false" label="Save"/>
+  </div>
+</p-dialog>

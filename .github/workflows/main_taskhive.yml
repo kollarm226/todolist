@@ -1,5 +1,9 @@
-trigger:
-- main
+name: Build and deploy ASP.Net Core app to Azure Web App - taskhive
+
+on:
+  push:
+    branches:
+      - main 
 
 pool:
     vmImage: 'windows-latest'

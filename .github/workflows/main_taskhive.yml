@@ -31,17 +31,17 @@ jobs:
         working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
 
       - name: Publish the app
-        run: dotnet publish -c Release -o "${{ github.workspace }}/todolist/publish"
+        run: dotnet publish -c Release -o "${{ github.workspace }}/todolist/todolist/publish"
         working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API 
 
       - name: List contents of publish folder
-        run: dir ${{ github.workspace }}/todolist/publish
+        run: dir ${{ github.workspace }}/todolist/todolist/publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{ github.workspace }}/todolist/publish
+          path: ${{ github.workspace }}/todolist/todolist/publish
 
   deploy:
     runs-on: windows-latest
@@ -71,4 +71,4 @@ jobs:
         with:
           app-name: 'taskhive'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/todolist/publish
+          package: ${{ github.workspace }}/todolist/todolist/publish

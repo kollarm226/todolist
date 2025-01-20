@@ -14,24 +14,31 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
 
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: backend # Update this to the directory containing your .csproj or .sln file
+
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        working-directory: backend # Same directory as above
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+      - name: Publish the app
+        run: dotnet publish -c Release -o "${{ github.workspace }}/publish"
+        working-directory: backend # Same directory as above
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ github.workspace }}/publish
 
   deploy:
     runs-on: windows-latest
@@ -40,20 +47,20 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6BF5A976542849FB82E4C70C82D14EDB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6127A0582AF54EBD87E2E8847E08F178 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3DF320768F694144A4DA4F51C08E32CD }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -61,5 +68,4 @@ jobs:
         with:
           app-name: 'taskhive'
           slot-name: 'Production'
-          package: .
-          
+          package: ${{ github.workspace }}/publish

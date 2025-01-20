@@ -10,8 +10,11 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  group: ''
 
-jobs:
+stages: 
+- stage: Build
+  jobs:
     - job: building
       steps:
       - task: VSBuild@1
@@ -19,19 +22,22 @@ jobs:
           solution: '$(solution)'
           msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
           platform: '$(buildPlatform)'
-          configuration: '$(buildConfiguration)'g
+          configuration: '$(buildConfiguration)'
 
+- stage: Publish
+  dependsOn: Build
+  jobs:
     - job: publishing
-        steps:
-        - script: dotnet build --configuration $(buildConfiguration)
-          displayName: 'dotnet build $(buildConfiguration)'
-        - task: DotNetCoreCLI@2
-          inputs:
-            command: 'publish'
-            publishWebProjects: true
-        - task: AzureWebApp@1
-          inputs:
-            azureSubscription: '29ed8cec-f3a2-4dac-a518-bcd1f6cc3581'
-            appType: 'webApp'
-            appName: 'taskhive'
-            package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      steps:
+      - script: dotnet build --configuration $(buildConfiguration)
+        displayName: 'dotnet build $(buildConfiguration)'
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'publish'
+          publishWebProjects: true
+      - task: AzureWebApp@1
+        inputs:
+          azureSubscription: '29ed8cec-f3a2-4dac-a518-bcd1f6cc3581'
+          appType: 'webApp'
+          appName: 'taskhive'
+          package: '$(System.DefaultWorkingDirectory)/**/*.zip'

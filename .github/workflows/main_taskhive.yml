@@ -24,15 +24,15 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: backend # Update this to the directory containing your .csproj or .sln file
+        working-directory: todolist/Backend/TodoApp.API/TodoApp.API # Path to your .csproj file
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-        working-directory: backend # Same directory as above
+        working-directory: todolist/Backend/TodoApp.API/TodoApp.API # Same directory as above
 
       - name: Publish the app
         run: dotnet publish -c Release -o "${{ github.workspace }}/publish"
-        working-directory: backend # Same directory as above
+        working-directory: todolist/Backend/TodoApp.API/TodoApp.API # Same directory as above
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4

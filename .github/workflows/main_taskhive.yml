@@ -31,16 +31,13 @@ jobs:
         working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
 
       - name: Publish the app
-        run: dotnet publish -c Release -o ${{ github.workspace }}/publish
-        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
-
-      - name: Debug List files in publish directory
-        run: dir ${{ github.workspace }}/publish
+        run: dotnet publish -c Release -o "${{ github.workspace }}/publish"
+        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: dotnet-app
+          name: .net-app
           path: ${{ github.workspace }}/publish
 
   deploy:
@@ -50,13 +47,13 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
+      id-token: write 
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: dotnet-app
+          name: .net-app
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -71,4 +68,4 @@ jobs:
         with:
           app-name: 'taskhive'
           slot-name: 'Production'
-          package: ${{ runner.temp }}/dotnet-app/publish
+          package: ${{ github.workspace }}/publish

@@ -21,24 +21,24 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
+        working-directory: Backend\TodoApp.API\TodoApp.API\TodoApp.API
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
+        working-directory: Backend\TodoApp.API\TodoApp.API\TodoApp.API
 
       - name: Publish the app
-        run: dotnet publish -c Release -o "${{ github.workspace }}/Backend/TodoApp.API/TodoApp.API/publish"
-        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API 
+        run: dotnet publish -c Release -o "${{ github.workspace }}\Backend\TodoApp.API\TodoApp.API\publish"
+        working-directory: Backend\TodoApp.API\TodoApp.API\TodoApp.API 
 
       - name: List contents of publish folder
-        run: dir ${{ github.workspace }}/Backend/TodoApp.API/TodoApp.API/publish
+        run: dir ${{ github.workspace }}\Backend\TodoApp.API\TodoApp.API\publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{ github.workspace }}/Backend/TodoApp.API/TodoApp.API/publish
+          path: ${{ github.workspace }}\Backend\TodoApp.API\TodoApp.API\publish
 
   deploy:
     runs-on: windows-latest
@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'taskhive'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/Backend/TodoApp.API/TodoApp.API/publish
+          package: ${{ github.workspace }}\Backend\TodoApp.API\TodoApp.API\publish

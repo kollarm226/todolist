@@ -69,7 +69,7 @@ public async Task<IActionResult> GetAllTodos([FromRoute] Guid listId)
         
         // Method that add new task. It generates new ID for that task.
         [HttpPost("post")]
-        public async Task<IActionResult> AddTodo(Todo todo)                                                    
+    public async Task<IActionResult> AddTodo(Todo todo)                                                    
         {
             try
             {

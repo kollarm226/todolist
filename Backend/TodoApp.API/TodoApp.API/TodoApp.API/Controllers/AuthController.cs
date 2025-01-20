@@ -99,7 +99,13 @@ namespace TodoApp.API.Controllers
 
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    user = new
+                    {
+                        id = user.id,
+                        name = user.name,
+                        email = user.email
+                    }
                 });
             }
             catch (DbUpdateException ex)

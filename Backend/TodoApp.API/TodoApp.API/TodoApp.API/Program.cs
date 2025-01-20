@@ -31,11 +31,10 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
-        builder.WithOrigins("http://localhost:4200") // Allow this origin
-            .AllowAnyMethod()                   
-            .AllowAnyHeader()
-             .AllowCredentials());
+    options.AddPolicy("AllowAll", policyBuilder =>
+        policyBuilder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 // Add authentication
@@ -105,13 +104,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/swagger/index.html");
-    return Task.CompletedTask;
-});
+// app.MapGet("/", context =>
+// {
+//     context.Response.Redirect("/swagger/index.html");
+//     return Task.CompletedTask;
+// });
 
-app.UseCors("AllowSpecificOrigin");
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();

@@ -10,6 +10,8 @@ import {PickList} from 'primeng/picklist';
 import {PrimeTemplate} from 'primeng/api';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Task} from '../models/task';
+import {BackendService} from '../backend.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-lists',
@@ -29,12 +31,23 @@ import {Task} from '../models/task';
     PickList,
     PrimeTemplate,
     FloatLabel,
-    AccordionContent,
+    AccordionContent
   ],
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.css'],
 })
 export class ListsComponent {
+
+  name = '';
+  color = '';
+  UserID = '';
+  icon = '';
+
+  constructor(private backendService: BackendService, private authService: AuthService) {
+    this.UserID = this.authService.getUserId() || '';
+    console.log(this.UserID);
+  }
+
   tabs = [
     {
       title: 'School',
@@ -64,7 +77,6 @@ export class ListsComponent {
     return tab.title;
   }
 
-  color: string | undefined;
   uncompletedTasks: Task[] = [
     {
       id: '1', name: 'Study Python',
@@ -126,4 +138,34 @@ export class ListsComponent {
     console.log("task added")
   }
 
+  addList() {
+    const newList = {
+      list_name: this.name,
+      color: Number(this.color),
+      UserID: this.UserID,
+      icon: Number(this.icon),
+    };
+
+    console.log('Payload:', newList);
+
+    this.backendService.addList(newList).subscribe(
+      (response) => {
+        console.log('List created successfully:', response);
+        this.resetForm();
+      },
+      (error) => {
+        console.error('Error creating list:', error);
+      }
+    );
+
+    this.visible = false;
+  }
+
+  resetForm() {
+    this.name = '';
+    this.color = '';
+
+  }
 }
+
+

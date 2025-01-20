@@ -28,6 +28,10 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, user).pipe(
       map((response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        console.log(localStorage.getItem('user'));
+
+
         return response;
       }),
       catchError((error) => {
@@ -53,4 +57,10 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+  getUserId(): string | null {
+    const user = this.getLoggedInUser();
+    return user ? user.id : null;
+  }
+
 }

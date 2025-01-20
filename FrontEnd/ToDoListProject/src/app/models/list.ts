@@ -1,5 +1,5 @@
 export class List {
-  id!: string;
+  id?: string;
   UserID!: string;
   list_name!: string;
   icon!: number;

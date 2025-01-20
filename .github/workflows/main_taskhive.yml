@@ -34,7 +34,7 @@ jobs:
         run: dotnet publish -c Release -o ${{ github.workspace }}/publish
         working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
 
-      - name: Debug: List files in publish directory
+      - name: Debug List files in publish directory
         run: dir ${{ github.workspace }}/publish
 
       - name: Upload artifact for deployment job

@@ -1,22 +1,24 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - taskhive
 
-trigger:
-  branches:
-    include:
+on:
+  push:
+    branches:
       - main
+  workflow_dispatch:
 
-pool:
-  vmImage: 'windows-latest'
+jobs:
+  build:
+    runs-on: windows-latest
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-stages:
-  - stage: Build
-    displayName: 'Build Stage'
-    jobs:
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
       - job: BuildJob
         displayName: 'Build Application'
         steps:
@@ -27,23 +29,32 @@ stages:
               platform: '$(buildPlatform)'
               configuration: '$(buildConfiguration)'
 
-  - stage: Publish
-    displayName: 'Publish Stage'
-    dependsOn: Build
-    jobs:
-      - job: PublishJob
-        displayName: 'Publish Application'
-        steps:
-          - script: dotnet build --configuration $(buildConfiguration)
-            displayName: 'Build the application using dotnet'
-          - task: DotNetCoreCLI@2
-            inputs:
-              command: 'publish'
-              publishWebProjects: true
-              configuration: $(buildConfiguration)
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '29ed8cec-f3a2-4dac-a518-bcd1f6cc3581'
-              appType: 'webApp'
-              appName: 'taskhive'
-              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write 
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6BF5A976542849FB82E4C70C82D14EDB }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6127A0582AF54EBD87E2E8847E08F178 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3DF320768F694144A4DA4F51C08E32CD }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          appType: 'webApp'
+          appName: 'taskhive'
+          package: '$(System.DefaultWorkingDirectory)/**/*.zip'

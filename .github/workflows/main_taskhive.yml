@@ -1,8 +1,8 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - taskhive
 
-on:
-  push:
-    branches:
+trigger:
+  branches:
+    include:
       - main
 
 pool:
@@ -12,31 +12,35 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  group: ''
 
 stages:
   - stage: Build
+    displayName: 'Build Stage'
     jobs:
-      - job: building
+      - job: BuildJob
+        displayName: 'Build Application'
         steps:
           - task: VSBuild@1
             inputs:
               solution: '$(solution)'
-              msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+              msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)"'
               platform: '$(buildPlatform)'
               configuration: '$(buildConfiguration)'
 
   - stage: Publish
+    displayName: 'Publish Stage'
     dependsOn: Build
     jobs:
-      - job: publishing
+      - job: PublishJob
+        displayName: 'Publish Application'
         steps:
           - script: dotnet build --configuration $(buildConfiguration)
-            displayName: 'dotnet build $(buildConfiguration)'
+            displayName: 'Build the application using dotnet'
           - task: DotNetCoreCLI@2
             inputs:
               command: 'publish'
               publishWebProjects: true
+              configuration: $(buildConfiguration)
           - task: AzureWebApp@1
             inputs:
               azureSubscription: '29ed8cec-f3a2-4dac-a518-bcd1f6cc3581'

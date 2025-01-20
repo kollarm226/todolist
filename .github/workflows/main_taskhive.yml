@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy ASP.Net Core app to Azure Web App - taskhive
 
 on:
@@ -14,9 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug: List directory structure
-        run: dir /s
-
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
@@ -32,7 +32,7 @@ jobs:
 
       - name: Publish the app
         run: dotnet publish -c Release -o "${{ github.workspace }}/publish"
-        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API
+        working-directory: Backend/TodoApp.API/TodoApp.API/TodoApp.API 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -47,7 +47,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
+      id-token: write 
 
     steps:
       - name: Download artifact from build job

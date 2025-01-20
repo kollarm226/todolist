@@ -16,12 +16,31 @@ namespace TodoApp.API.Controllers
             _dbContext = dbContext;
         }
 
+        // [HttpGet]
+        // public async Task<IActionResult> GetLists()
+        // {
+        //     try
+        //     {
+        //         var lists = await _dbContext.Lists.ToListAsync();
+        //         return Ok(lists);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, "Internal server error. Please contact support.");
+        //     }
+        // }
         [HttpGet]
-        public async Task<IActionResult> GetLists()
+        public async Task<IActionResult> GetListsById([FromQuery] Guid userId)
         {
             try
             {
-                var lists = await _dbContext.Lists.ToListAsync();
+                var lists = await _dbContext.Lists.Where(list => userId == list.UserID).ToListAsync();
+
+                if (!lists.Any())
+                {
+                    return NotFound("No lists found for the specified user.");
+                }
+
                 return Ok(lists);
             }
             catch (Exception ex)
@@ -29,6 +48,7 @@ namespace TodoApp.API.Controllers
                 return StatusCode(500, "Internal server error. Please contact support.");
             }
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(Guid id)
@@ -93,7 +113,7 @@ namespace TodoApp.API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                
+
                 list.id = Guid.NewGuid();
 
                 await _dbContext.Lists.AddAsync(list);
@@ -108,4 +128,3 @@ namespace TodoApp.API.Controllers
         }
     }
 }
-

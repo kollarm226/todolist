@@ -4,6 +4,8 @@ import {Popover} from 'primeng/popover';
 import {Button} from 'primeng/button';
 import {CommonModule, NgForOf} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
+import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -19,8 +21,10 @@ import {Dialog} from 'primeng/dialog';
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']
 })
+
+
 export class TopbarComponent {
-  @ViewChild('op') op!: Popover;
+
   menuItems = [
     {label: 'My account', action: 'My account'},
     {label: 'Display settings', action: 'Display settings'},
@@ -29,8 +33,13 @@ export class TopbarComponent {
     {label: 'Help', action: 'Help'},
     {label: 'Terms of use', action: 'Terms of use'},
     {label: 'Privacy policy', action: 'Privacy policy'},
-    {label: 'Cookies policy', action: 'Cookies policy'}
+    {label: 'Logout', action: 'Logout'},
   ];
+
+  @ViewChild('op') op!: Popover;
+
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   dialogVisible: boolean = false;
   selectedOption: string = '';
@@ -42,5 +51,14 @@ export class TopbarComponent {
   selectOption(menuItem: any) {
     this.selectedOption = menuItem.action;
     this.dialogVisible = true;
+
+    if (menuItem.action === 'Logout') {
+      this.logout();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirect to the login page }
   }
 }

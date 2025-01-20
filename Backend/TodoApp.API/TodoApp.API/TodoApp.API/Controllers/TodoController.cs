@@ -131,10 +131,9 @@ public async Task<IActionResult> GetAllTodos([FromRoute] Guid listId)
             }
         }
         
-        // Method that can toggle parameter "isDone". When it is false it toggle it to true and when is true it toggle it to false.
-        // Insert parameter is task's ID.
-        [HttpPut("done/{id}/{done}")]
-        public async Task<IActionResult> ChangeDoneTodo([FromRoute] Guid id, Todo todoUpdateRequest)                
+        // Method that toggles the isDone status for a task by ID
+        [HttpPut("done/{id}")]
+        public async Task<IActionResult> ChangeDoneTodo([FromRoute] Guid id)
         {
             try
             {
@@ -143,17 +142,19 @@ public async Task<IActionResult> GetAllTodos([FromRoute] Guid listId)
                 if (todo == null)
                     return NotFound();
 
+                // Toggle the isDone status
                 todo.isDone = !todo.isDone;
 
                 await _todoDbContext.SaveChangesAsync();
 
-                return Ok(todo);
+                return Ok(todo);  // Return the updated task
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error. Please contact support.");
             }
         }
+
         
         
         // Helper method for better readability and reuse.

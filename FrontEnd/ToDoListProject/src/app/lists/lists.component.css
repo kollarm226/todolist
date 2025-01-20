@@ -1,18 +1,39 @@
 .container {
   display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
 
 .sidebar {
-  width: 20%; /* 1/5 of the screen width */
-  margin-right: 20px;
+  width: 20%;
 
 }
 
 .content {
-  width: 80%; /* Remaining space for the main content */
+  width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
+.todo-card {
+  margin-bottom: 20px;
+}
 
-.task {
+.add-todo-button {
+  margin-top: 10px;
+}
 
+.todo-table {
+  margin-top: 20px;
+}
+
+.plus-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
+
+.card {
+  margin-bottom: 20px;
 }

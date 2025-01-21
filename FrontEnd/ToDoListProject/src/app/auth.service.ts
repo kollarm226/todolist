@@ -7,7 +7,7 @@ import {catchError, map} from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5186/api/auth';
+  private apiUrl = 'https://taskhive-azgacehfbeapb9hn.westeurope-01.azurewebsites.net/api/auth';
 
   constructor(private http: HttpClient) {
   }

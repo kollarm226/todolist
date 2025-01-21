@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListsComponent } from './lists.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListsComponent', () => {
   let component: ListsComponent;
@@ -8,7 +9,7 @@ describe('ListsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListsComponent, HttpClientTestingModule]
+      imports: [ListsComponent, HttpClientTestingModule, BrowserAnimationsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListsComponent);

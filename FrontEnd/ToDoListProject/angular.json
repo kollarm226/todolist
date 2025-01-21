@@ -21,10 +21,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -38,12 +36,13 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2MB",
-                  "maximumError": "3MB"
-                },
+                  "maximumError": "5MB"
+                }
+              ],
+              "fileReplacements": [
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -97,5 +96,6 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "ToDoListProject"
 }

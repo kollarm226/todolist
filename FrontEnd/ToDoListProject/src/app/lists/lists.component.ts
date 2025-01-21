@@ -13,6 +13,7 @@ import {ColorPickerModule} from 'primeng/colorpicker';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Dialog} from 'primeng/dialog';
 import {Todo} from '../models/todo';
+import {Message} from 'primeng/message';
 
 @Component({
   selector: 'app-lists',
@@ -30,6 +31,7 @@ import {Todo} from '../models/todo';
     ColorPickerModule,
     FloatLabel,
     Dialog,
+    Message,
   ],
 })
 export class ListsComponent implements OnInit {

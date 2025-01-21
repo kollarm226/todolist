@@ -8,8 +8,8 @@ import {Todo} from './models/todo';
   providedIn: 'root',
 })
 export class BackendService {
-  private listsApiUrl = 'http://taskhive-azgacehfbeapb9hn.westeurope-01.azurewebsites.net/api/lists';
-  private tasksApiUrl = 'http://taskhive-azgacehfbeapb9hn.westeurope-01.azurewebsites.net/api/todo';
+  private listsApiUrl = 'https://taskhive-azgacehfbeapb9hn.westeurope-01.azurewebsites.net/api/lists';
+  private tasksApiUrl = 'https://taskhive-azgacehfbeapb9hn.westeurope-01.azurewebsites.net/api/todo';
 
   constructor(private http: HttpClient) {
   }

@@ -2,9 +2,10 @@
   <div class="sidebar">
     <div class="card flex justify-center">
       <p-menu [model]="items"></p-menu>
-    </div>
+      </div>
+    <div class="PlusButton">
     <p-button (click)="showDialog()" icon="pi pi-plus"></p-button>
-
+  </div>
     <p-dialog [(visible)]="visible" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [style]="{ width: '25rem' }"
               header="Add list">
       <div class="flex items-center gap-4 mb-4">
@@ -27,7 +28,7 @@
   <!-- Main content area -->
   <div class="content">
     <!-- Add New Todo form -->
-    <div class="card">
+    <div class="Card">
       <p-floatlabel variant="on">
         <input [(ngModel)]="newTask" autocomplete="off" id="Add new Todo" pInputText/>
         <label>Add new Todo</label>
@@ -64,8 +65,8 @@
       </div>
 
       <ng-template #noTasks>
-        <div style="margin-top: 16px">
-          <p-message severity="secondary">No tasks available in  this list.</p-message>
+        <div style="margin-top: 16px;">
+        <p-message severity="secondary">No tasks available in  this list.</p-message>
         </div>
       </ng-template>
     </div>

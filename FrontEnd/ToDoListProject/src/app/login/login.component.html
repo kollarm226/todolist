@@ -1,7 +1,11 @@
 <app-header></app-header>
 <div class="center-container">
-  <p-card header="Login" class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
-    <form [formGroup]="formGroup">
+  <p-card class="center-header" [style]="{ width: '18rem', overflow: 'hidden' }">
+    <ng-template pTemplate="header">
+      <div class="custom-header">Login</div>
+    </ng-template>
+
+  <form [formGroup]="formGroup">
       <p-iftalabel class="field-spacing">
         <p-iconfield>
           <p-inputicon class="pi pi-envelope"></p-inputicon>
@@ -27,11 +31,14 @@
         <!--        TODO-->
         <a href="#" (click)="forgotPassword()">Forgot password?</a>
       </div>
-
+      <div style="margin-top: 16px">
       <p-button (click)="login()" [disabled]="!formGroup.valid" class="w-full" label="Login"></p-button>
-      <div class="signup-link">
+      </div>
+        <div class="signup-link">
         <!--        TODO-->
+          <div style="margin-top: 14px">
         Don't have an account? <a (click)="signUp() "><u>Sign up</u></a>
+            </div>
       </div>
     </form>
   </p-card>

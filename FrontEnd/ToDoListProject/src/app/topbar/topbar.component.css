@@ -34,3 +34,8 @@
 .justify-between {
   justify-content: space-between;
 }
+.logo {
+  width: 250px;
+  height: auto;
+  margin-top: -18px;
+}

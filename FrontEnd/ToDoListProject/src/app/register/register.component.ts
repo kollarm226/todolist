@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
             detail: 'You have been registered!'
           });
           setTimeout(() => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/login']);
           }, 3500);
         },
         error: (err) => {

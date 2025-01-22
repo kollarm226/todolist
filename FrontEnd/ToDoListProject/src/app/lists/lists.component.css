@@ -44,8 +44,8 @@ margin-top: 9px;
   margin-left: 70px;
 }
 .todotable{
-  border-radius: 7px; /* Nastavte zaoblenie rohov */
-  overflow: hidden;    /* Zabezpečte, aby obsah nepretiekol za zaoblené rohy */
-  margin-top: 17px;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-top: 10px;
 }
 

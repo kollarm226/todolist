@@ -11,9 +11,13 @@
   height: 1rem;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(47, 47, 47, 0.1);
 }
 .logo {
   width: 250px;
   height: auto;
   margin-top: -18px;
 }
+
+
+

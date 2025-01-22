@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           });
           setTimeout(() => {
             this.router.navigate(['/home']);
-          }, 3500);
+          }, 1500);
         },
         error: (err) => {
           this.messageService.add({

@@ -6,7 +6,7 @@
 
 .sidebar {
   width: 20%;
-margin-top: 5px;
+margin-top: 9px;
 }
 
 .content {
@@ -36,11 +36,16 @@ margin-top: 5px;
 
 .Card {
   margin-bottom: 10px;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-left: -70px;
 }
 .PlusButton {
   margin-top: 5px;
   margin-left: 70px;
+}
+.todotable{
+  border-radius: 7px; /* Nastavte zaoblenie rohov */
+  overflow: hidden;    /* Zabezpečte, aby obsah nepretiekol za zaoblené rohy */
+  margin-top: 17px;
 }
 

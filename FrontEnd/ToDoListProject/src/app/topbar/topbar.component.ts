@@ -31,7 +31,7 @@ export class TopbarComponent {
     {label: 'Preferences', action: 'Preferences'},
     {label: 'Notifications', action: 'Notifications'},
     {label: 'Help', action: 'Help'},
-    {label: 'Terms of use', action: 'Terms of use'},
+    {label: 'Terms of use', action: 'Terms of use' },
     {label: 'Privacy policy', action: 'Privacy policy'},
     {label: 'Logout', action: 'Logout'},
   ];

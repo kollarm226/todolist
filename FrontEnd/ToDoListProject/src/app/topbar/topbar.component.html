@@ -12,7 +12,8 @@
 </p-panel>
 
 <p-dialog header="User Preferences" [(visible)]="dialogVisible" [modal]="true" [style]="{width: '815px'}">
-  <h1>User Preferences</h1>
+ <!-- <h1>User Preferences</h1> -->
+  <br>
   <div class="flex">
     <div class="w-1/3">
       <ul class="list-none p-0 m-0 flex flex-col">
@@ -21,7 +22,9 @@
             <span class="font-medium">{{ menuItem.label }}</span>
           </div>
         </li>
+
       </ul>
+
     </div>
     <div class="w-2/3">
       <ng-container *ngIf="selectedOption === 'option1'">
@@ -56,6 +59,7 @@
         <h2>Option 8 Content</h2>
 
       </ng-container>
+
     </div>
   </div>
 </p-dialog>

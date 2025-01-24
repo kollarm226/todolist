@@ -53,11 +53,12 @@
               <td>{{ task.name }}</td>
               <td>
                 <!-- Vymazanie ikony -->
-                <p-button icon="pi pi-trash" [ngClass]="{ 'p-button-success': task.isDeleted,  }
-                 "class="p-button"
-                  (click)="deleteTask(task.id!)"
-                  tooltip="Delete Task">
-                </p-button>
+                <button
+                  class="custom-trash-button"
+                  (click)="deleteTask(task?.id)"
+                  title="Delete Task">
+                  <img src="https://raw.githubusercontent.com/kollarm226/todolist/main/FrontEnd/ToDoListProject/assets/pngtree-trash-button-for-apps-with-red-and-white-color-clipart-vector-png-image_6395908.png" alt="Delete" />
+                </button>
 
               </td>
             </tr>

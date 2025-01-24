@@ -54,5 +54,21 @@
 .todotable td {
   padding: 10px;
 }
+.custom-trash-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove the border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.custom-trash-button img {
+  width: 40px; /* Zvýšenie šírky obrázka */
+  height: 40px; /* Zvýšenie výšky obrázka */
+  margin-top: 3px;
+}
+
+.custom-trash-button:hover {
+  background-color: transparent; /* Ensure no background color on hover */
+}
 
 

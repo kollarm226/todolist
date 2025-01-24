@@ -1,5 +1,7 @@
 <p-panel [style]="{background: '#464646', color: 'white'}" styleClass="header-bar">
-  <div class="header-content">
+  <div
+    class="header-content"
+    [class.fade-in]="isFirstLoad">
     <img src="https://raw.githubusercontent.com/kollarm226/todolist/main/FrontEnd/ToDoListProject/assets/th_logo.png" alt="Logo" class="logo" />
   </div>
 </p-panel>

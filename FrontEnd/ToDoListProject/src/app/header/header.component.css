@@ -1,6 +1,4 @@
-.header-bar {
-  background-color: #617691;
-  color: white;
+.fade-in {
   animation: fadeIn 3s ease;
 }
 
@@ -23,22 +21,9 @@
   align-items: center;
   box-shadow: 0 4px 6px rgba(47, 47, 47, 0.1);
 }
+
 .logo {
   width: 250px;
   height: auto;
   margin-top: -18px;
-  animation: fadeIn 3s ease;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-
-
-
+}

@@ -45,32 +45,32 @@
           [tableStyle]="{'min-width': '50rem'}"
           [value]="tasks"
           dataKey="id">
-          <ng-template pTemplate="header">
-            <tr>
-              <th style="width: 4rem">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-              </th>
-              <th>Name</th>
-            </tr>
-          </ng-template>
+          <!--  <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 4rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Name</th>
+              </tr>
+           </ng-template> !-->
           <ng-template let-task pTemplate="body">
-            <tr>
-              <td>
-                <p-tableCheckbox [value]="task"></p-tableCheckbox>
-              </td>
-              <td>{{ task.name }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-
-      <ng-template #noTasks>
-        <div style="margin-top: 10px;">
-        <p-message severity="secondary">No tasks added yet. Click on green ADD button to add your first task.</p-message>
+              <tr>
+                <td>
+                  <p-tableCheckbox [value]="task"></p-tableCheckbox>
+                </td>
+                <td>{{ task.name }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
-      </ng-template>
+
+        <ng-template #noTasks>
+          <div style="margin-top: 10px;">
+          <p-message severity="secondary">No tasks added yet. Click on green ADD button to add your first task.</p-message>
+          </div>
+        </ng-template>
+      </div>
     </div>
+
+
   </div>
-
-
-</div>

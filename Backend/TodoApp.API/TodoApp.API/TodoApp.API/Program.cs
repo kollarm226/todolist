@@ -70,28 +70,6 @@ if (string.IsNullOrEmpty(connectionString))
 builder.Services.AddDbContext<TodoDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21))));
 
-// using (MySqlConnection conn = new MySqlConnection(connectionString))
-// {
-//     try
-//     {
-//         conn.Open();
-//         Console.WriteLine("Connection successful!");
-//         string sql = "SELECT * FROM users";
-//         MySqlCommand cmd = new MySqlCommand(sql, conn);
-//         MySqlDataReader rdr = cmd.ExecuteReader();
-//
-//         while (rdr.Read()) { 
-//             Console.WriteLine($"{rdr[0]} -- {rdr[1]}");
-//
-//         }
-//     }
-//     catch (Exception ex)
-//     {
-//         Console.WriteLine(ex.ToString());
-//     }
-//
-// }
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline

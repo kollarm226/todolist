@@ -14,6 +14,8 @@ import { FloatLabel } from 'primeng/floatlabel';
 import { Dialog } from 'primeng/dialog';
 import { Todo } from '../models/todo';
 import { Message } from 'primeng/message';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-lists',
@@ -32,7 +34,9 @@ import { Message } from 'primeng/message';
     FloatLabel,
     Dialog,
     Message,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
 })
 export class ListsComponent implements OnInit {
   name = '';
@@ -46,7 +50,11 @@ export class ListsComponent implements OnInit {
   newTask = '';
   currentListId: string = '';
 
-  constructor(private backendService: BackendService, private authService: AuthService) {
+  constructor(
+    private backendService: BackendService,
+    private authService: AuthService,
+    private confirmationService: ConfirmationService
+  ) {
     this.UserID = this.authService.getUserId() || '';
   }
 
@@ -56,7 +64,6 @@ export class ListsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Načítanie zoznamov pre konkrétneho používateľa
     this.backendService.getLists(this.UserID).subscribe((menuItems) => {
       this.items = menuItems.map((item) => ({
         label: item.list_name,
@@ -73,10 +80,9 @@ export class ListsComponent implements OnInit {
   }
 
   fetchTasks(listId: string) {
-    // Načítanie úloh pre vybraný zoznam (len nevymazané úlohy)
     this.backendService.getTasksByListId(listId).subscribe(
       (tasks) => {
-        this.tasks = tasks.filter(task => !task.isDeleted);  // Zobrazíme len nevymazané úlohy
+        this.tasks = tasks.filter((task) => !task.isDeleted);
       },
       (error) => {
         if (error.status === 404) {
@@ -174,7 +180,7 @@ export class ListsComponent implements OnInit {
       name: this.newTask,
       isDone: false,
       priority: 1,
-      isDeleted: false,  // Keď pridáš úlohu, nebude vymazaná
+      isDeleted: false,
     });
     this.backendService.addTodo(newTask).subscribe(
       (createdTask: Todo) => {
@@ -189,20 +195,24 @@ export class ListsComponent implements OnInit {
   }
 
   deleteTask(taskId: string) {
-    this.backendService.deleteTodo(taskId).subscribe(
-      () => {
-        // Nastavenie isDeleted na true, ak je úloha vymazaná
-        const task = this.tasks.find(t => t.id === taskId);
-        if (task) {
-          task.isDeleted = true; // Zmena stavu na "vymazané"
-        }
-        // Po vymazaní úlohy ju odstránime zo zoznamu
-        this.tasks = this.tasks.filter(task => task.id !== taskId);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this task?',
+      header: 'Confirm Deletion',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.backendService.deleteTodo(taskId).subscribe(
+          () => {
+            this.tasks = this.tasks.filter((task) => task.id !== taskId);
+          },
+          (error) => {
+            console.error('Error deleting task:', error);
+            alert('Failed to delete the task. Please try again.');
+          }
+        );
       },
-      (error) => {
-        console.error('Error deleting task:', error);
-        alert('Failed to delete the task. Please try again.');
-      }
-    );
+      reject: () => {
+        console.log('Task deletion canceled.');
+      },
+    });
   }
 }

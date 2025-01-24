@@ -5,11 +5,11 @@
       <div class="custom-header"><b>Login</b></div>
     </ng-template>
 
-  <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="login()">
       <p-iftalabel class="field-spacing">
         <p-iconfield>
           <p-inputicon class="pi pi-envelope"></p-inputicon>
-          <input autocomplete="off" formControlName="email" id="email" pInputText/>
+          <input autocomplete="off" formControlName="email" id="email" pInputText />
         </p-iconfield>
         <label for="email">Email</label>
         <div *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
@@ -28,19 +28,22 @@
       </p-iftalabel>
 
       <div class="forgot-password">
-        <!--        TODO-->
         <a href="#" (click)="forgotPassword()">Forgot password?</a>
       </div>
       <div style="margin-top: 16px">
-      <p-button (click)="login()" [disabled]="!formGroup.valid" class="w-full" label="Login"></p-button>
+        <p-button type="submit" [disabled]="!formGroup.valid || loading" class="w-full" label="Login"></p-button>
       </div>
-        <div class="signup-link">
-        <!--        TODO-->
-          <div style="margin-top: 14px">
-        Don't have an account? <a (click)="signUp() "><u>Sign up</u></a>
-            </div>
+      <div class="signup-link">
+        <div style="margin-top: 14px">
+          Don't have an account? <a (click)="signUp()"><u>Sign up</u></a>
+        </div>
       </div>
     </form>
+
+    <div *ngIf="loading" class="loading-skeleton">
+      <p-skeleton width="100%" height="20px"></p-skeleton>
+      <p-skeleton width="100%" height="20px"></p-skeleton>
+    </div>
   </p-card>
 </div>
 <p-toast></p-toast>

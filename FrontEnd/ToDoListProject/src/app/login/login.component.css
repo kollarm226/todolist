@@ -1,4 +1,4 @@
-.center-container{
+.center-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,12 +7,16 @@
 
 .center-header {
   text-align: center;
-
 }
 
 .field-spacing {
   margin-bottom: 1rem;
 }
+
 .custom-header {
   margin-top: 20px;
+}
+
+.loading-skeleton {
+  margin-top: 16px;
 }

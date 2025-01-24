@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {MenuItem} from 'primeng/api';
-import {BackendService} from '../backend.service';
-import {AuthService} from '../auth.service';
-import {CommonModule} from '@angular/common';
-import {AccordionModule} from 'primeng/accordion';
-import {FormsModule} from '@angular/forms';
-import {Button} from 'primeng/button';
-import {InputText} from 'primeng/inputtext';
-import {Menu} from 'primeng/menu';
-import {TableModule} from 'primeng/table';
-import {ColorPickerModule} from 'primeng/colorpicker';
-import {FloatLabel} from 'primeng/floatlabel';
-import {Dialog} from 'primeng/dialog';
-import {Todo} from '../models/todo';
-import {Message} from 'primeng/message';
+import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { BackendService } from '../backend.service';
+import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
+import { FormsModule } from '@angular/forms';
+import { Button } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
+import { Menu } from 'primeng/menu';
+import { TableModule } from 'primeng/table';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { FloatLabel } from 'primeng/floatlabel';
+import { Dialog } from 'primeng/dialog';
+import { Todo } from '../models/todo';
+import { Message } from 'primeng/message';
 
 @Component({
   selector: 'app-lists',
@@ -46,7 +46,6 @@ export class ListsComponent implements OnInit {
   newTask = '';
   currentListId: string = '';
 
-
   constructor(private backendService: BackendService, private authService: AuthService) {
     this.UserID = this.authService.getUserId() || '';
   }
@@ -56,8 +55,8 @@ export class ListsComponent implements OnInit {
     this.fetchTasks(listId);
   }
 
-
   ngOnInit() {
+    // Načítanie zoznamov pre konkrétneho používateľa
     this.backendService.getLists(this.UserID).subscribe((menuItems) => {
       this.items = menuItems.map((item) => ({
         label: item.list_name,
@@ -73,11 +72,11 @@ export class ListsComponent implements OnInit {
     });
   }
 
-
   fetchTasks(listId: string) {
+    // Načítanie úloh pre vybraný zoznam (len nevymazané úlohy)
     this.backendService.getTasksByListId(listId).subscribe(
       (tasks) => {
-        this.tasks = tasks;
+        this.tasks = tasks.filter(task => !task.isDeleted);  // Zobrazíme len nevymazané úlohy
       },
       (error) => {
         if (error.status === 404) {
@@ -87,7 +86,6 @@ export class ListsComponent implements OnInit {
     );
   }
 
-
   addList() {
     const newList = {
       list_name: this.name,
@@ -95,7 +93,6 @@ export class ListsComponent implements OnInit {
       UserID: this.UserID,
       icon: Number(this.icon),
     };
-
 
     this.backendService.addList(newList).subscribe(() => {
       this.items = [
@@ -140,23 +137,18 @@ export class ListsComponent implements OnInit {
     );
   }
 
-
   onHeaderCheckboxToggle(event: any) {
-    const isChecked = event.checked;  // Whether the header checkbox is checked
+    const isChecked = event.checked;
 
-    // Create an array of promises for each task update
     const updateTasks = this.tasks.map((task) => {
-      // Only update the task if the current status is different from the header checkbox state
       if (task.isDone !== isChecked) {
         return this.backendService.toggleTaskStatus(task.id!).toPromise();
       }
       return null;
     });
 
-    // Execute all updates
     Promise.all(updateTasks.filter(Boolean)).then(
       () => {
-        // Synchronize the local task states
         this.tasks.forEach((task) => (task.isDone = isChecked));
       },
       (error) => {
@@ -172,7 +164,6 @@ export class ListsComponent implements OnInit {
       return;
     }
 
-
     if (!this.currentListId) {
       alert('No list selected. Please select a list first.');
       return;
@@ -183,7 +174,7 @@ export class ListsComponent implements OnInit {
       name: this.newTask,
       isDone: false,
       priority: 1,
-      isDeleted: false,
+      isDeleted: false,  // Keď pridáš úlohu, nebude vymazaná
     });
     this.backendService.addTodo(newTask).subscribe(
       (createdTask: Todo) => {
@@ -196,5 +187,22 @@ export class ListsComponent implements OnInit {
       }
     );
   }
-}
 
+  deleteTask(taskId: string) {
+    this.backendService.deleteTodo(taskId).subscribe(
+      () => {
+        // Nastavenie isDeleted na true, ak je úloha vymazaná
+        const task = this.tasks.find(t => t.id === taskId);
+        if (task) {
+          task.isDeleted = true; // Zmena stavu na "vymazané"
+        }
+        // Po vymazaní úlohy ju odstránime zo zoznamu
+        this.tasks = this.tasks.filter(task => task.id !== taskId);
+      },
+      (error) => {
+        console.error('Error deleting task:', error);
+        alert('Failed to delete the task. Please try again.');
+      }
+    );
+  }
+}

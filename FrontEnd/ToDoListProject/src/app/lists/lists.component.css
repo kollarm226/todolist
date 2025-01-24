@@ -6,7 +6,7 @@
 
 .sidebar {
   width: 20%;
-margin-top: 9px;
+  margin-top: 9px;
 }
 
 .content {
@@ -39,13 +39,20 @@ margin-top: 9px;
   margin-top: 10px;
   margin-left: -70px;
 }
+
 .PlusButton {
   margin-top: 5px;
   margin-left: 70px;
 }
-.todotable{
+
+.todotable {
   border-radius: 7px;
   overflow: hidden;
   margin-top: 10px;
 }
+
+.todotable td {
+  padding: 10px;
+}
+
 

@@ -1,3 +1,5 @@
+<p-confirmDialog></p-confirmDialog>
+
 <div class="container">
   <div class="sidebar">
     <div class="card flex justify-center">
@@ -52,22 +54,25 @@
               </td>
               <td>{{ task.name }}</td>
               <td>
-                <!-- Vymazanie ikony -->
-                <p-button icon="pi pi-trash" [ngClass]="{ 'p-button-success': task.isDeleted,  }
-                 "class="p-button"
-                  (click)="deleteTask(task.id!)"
-                  tooltip="Delete Task">
-                </p-button>
-
+                <!-- Delete icon -->
+                <button
+                  class="custom-trash-button"
+                  (click)="deleteTask(task?.id)"
+                  title="Delete Task">
+                  <img src="https://raw.githubusercontent.com/kollarm226/todolist/main/FrontEnd/ToDoListProject/assets/pngtree-trash-button-for-apps-with-red-and-white-color-clipart-vector-png-image_6395908.png" alt="Delete" />
+                </button>
               </td>
             </tr>
           </ng-template>
         </p-table>
       </div>
 
+      <!-- Template for no tasks -->
       <ng-template #noTasks>
         <div style="margin-top: 10px;">
-          <p-message severity="secondary">No tasks added yet. Click on green ADD button to add your first task.</p-message>
+          <p-message severity="secondary">
+            No tasks added yet. Click on the green ADD button to add your first task.
+          </p-message>
         </div>
       </ng-template>
     </div>
